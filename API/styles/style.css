@@ -1,21 +1,19 @@
 html, body {
     font-family: 'Roboto', sans-serif;
     width: 100%;
-    background-color: #292c31;
     letter-spacing: 0.2px;
 }
 
-h2 {
-    font-size: 20px;
-    margin: 15px;
-    text-align: center;
-}
-
+/* HEADER */
 header {
+    position: fixed;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
+    background-color: #292c31;
+    width: 100%;
+    z-index: 2;
 }
 
 #header_title {
@@ -27,6 +25,7 @@ header {
 #logout {
     color: #9a9da0;
     font-size: 14px;
+    cursor: pointer;
 }
 
 #logout:hover {
@@ -37,35 +36,38 @@ header {
     margin: 0px 30px 0px 8px;
 }
 
-#main_box {
-    display: flex;
-    flex-wrap: nowrap;
-    width: 100%;
-}
 
+/* NAVIGATION */
 nav {
-    width: 15%;
+    position: fixed;
+    width: 200px;
+    padding-top: 70px;
     background-color: #f8f9fa;
     border-right: 1px solid #dedfe0;
+    height: 100%;
+    z-index: 1;
 }
 
 nav, a {
     text-decoration: none;
-    color: #333333;
 }
 
 .nav_link {
     display: flex;
     flex-wrap: nowrap;
     margin: 30px;
+    color: #999;
+}
+
+.nav_link:hover {
+    color: #333333;
 }
 
 .nav_icon {
     width: 30px;
-    color: #999;
 }
 
-.nav_icon:hover {
+.nav_title {
     color: #333333;
 }
 
@@ -73,15 +75,25 @@ nav, a {
     color: #00a5fd;
 }
 
+
+/* MAIN DIV */
 main {
-    width: 85%;
+    width: 100%;
+    height: 100%;
     background-color: white;
     font-size: 15px;
     line-height: 1.8;
 }
 
-#main_box_content {
-    margin: 30px 200px;
+#main_box {
+    
+}
+
+
+h2 {
+    font-size: 20px;
+    margin: 15px;
+    text-align: center;
 }
 
 #form_newgame {
@@ -125,6 +137,12 @@ main {
     margin: 15px;
 }
 
+.scrolling {
+    width: 260px;
+    max-height: 140px;
+    overflow: auto;
+}
+
 .form_title {
     font-size: 16px;
     color: #00a5fd;
@@ -138,12 +156,6 @@ main {
 .form_icon {
     position: relative;
     left: 7px;
-}
-
-.form_plus {
-    color: #999;
-    text-align: right;
-    font-size: 12px;
 }
 
 h3 {
@@ -192,6 +204,21 @@ input[type="date"] {
 
 input[type="file"] {
     margin-bottom: 20px;
+}
+
+input[type="checkbox"] {
+    margin-right: 15px;
+}
+
+input[type="submit"] {
+    padding: 10px 15px;
+    font-size: 15px;
+    background-color: #00a5fd;
+    color: white;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: none;
 }
 
 textarea {
@@ -247,6 +274,7 @@ select {
 table {
     width: 50%;
     margin: auto;
+    margin-bottom: 50px;
 }
 
 th {

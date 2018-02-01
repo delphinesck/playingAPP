@@ -23,6 +23,10 @@ Flight::route('/admin/new_game', function(){
     Flight::render('admin/new_game');
 });
 
+Flight::route('/admin/new_other', function(){
+    Flight::render('admin/new_other');
+});
+
 Flight::route('/admin/users', function(){
     Flight::render('admin/users');
 });
@@ -38,7 +42,6 @@ Flight::route('/admin/statistics', function(){
 Flight::route('/admin/CreateGameService', function(){
     $gameService = new GameService();
     $result = $gameService->serviceCreateGame();
-    // Flight::redirect('/admin/games');
 });
 
 

@@ -1,17 +1,12 @@
 <?php
 
 class GameService {
-
-    public function serviceGetAllGames(){
-        $bddmanager = new BddManager();
-        $repo = $bddmanager->getGameRepository();
-        $repo->getAllGames();
-    }
+    private $error;
 
     public function serviceCreateGame(){
-        if( empty($_POST["title"]) ){
+        if(empty($_POST["title"])){
 
-            $paramserror = "incomplete";
+            $paramserror = "incomplete=1";
     
             if(isset($paramserror)){
                 Flight::redirect('/admin/new_game?'.$paramserror);
@@ -28,8 +23,8 @@ class GameService {
             $release_jp = $_POST["release_jp"];
             $release_na = $_POST["release_na"];
             $release_eu = $_POST["release_eu"];
-            $cover = $_POST["cover"];
-            $banner = $_POST["banner"];
+            $cover = $_FILES["cover"];
+            $banner = $_FILES["banner"];
     
             $game = new Game();
             $game->setTitle($title);
@@ -41,14 +36,47 @@ class GameService {
             $game->setRelease_jp($release_jp);
             $game->setRelease_na($release_na);
             $game->setRelease_eu($release_eu);
-            $game->setCover($cover);
-            $game->setBanner($banner);
+
+            $url = $this->dlFile($cover);
+            if(empty($this->error)){
+                $game->setCover($url);
+            }
+            $this->error = null;
+
+            $url = $this->dlFile($banner);
+            if(empty($this->error)){
+                $game->setBanner($url);
+            }
+            $this->error = null;
     
             $bddmanager = new BddManager();
             $repo = $bddmanager->getGameRepository();
             $repo->createGame($game);
     
             Flight::redirect('/admin/games');
+        }
+    }
+
+    public function dlFile($file){
+        if(isset($file) && $file['error'] == 0){
+            if($file['size'] <= 50000000){
+                $fileinfo = pathinfo($file['name']);
+                $extension_upload = $fileinfo['extension'];
+                $allowed_extensions = array('jpg', 'jpeg', 'gif', 'png');
+
+                if(in_array($extension_upload, $allowed_extensions)){
+                    $newName = hash('sha1',$file['name']).'.'.$extension_upload;
+                    move_uploaded_file($file['tmp_name'], '/Applications/MAMP/htdocs/WWW/playingapp/API/images/games/'.basename($newName));
+                    $url = '/Applications/MAMP/htdocs/WWW/playingapp/API/images/games/'.basename($newName);
+                    return $url;
+                }
+            }
+            else{
+                $this->error['size'] = 'This file is too big';
+            }
+        }
+        else{
+            $this->error['transfer'] = $file['error'];
         }
     }
 

@@ -1,8 +1,8 @@
 <?php echo $header ?>
 
-    <main>
-        <h2>Statistics</h2>
-    </main>
+<div id="main_box">
+    
+    <h2>Statistics</h2>
 
 </div>
 

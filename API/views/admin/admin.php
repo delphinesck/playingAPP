@@ -1,10 +1,8 @@
 <?php echo $header ?>
 
-    <main>
+<div id="main_box">
 
-        test
-
-    </main>
+    test
 
 </div>
 
