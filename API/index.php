@@ -27,6 +27,14 @@ Flight::route('/admin/new_other', function(){
     Flight::render('admin/new_other');
 });
 
+Flight::route('/admin/game/@id', function($id){
+    Flight::render('admin/view_game', array("id" => $id));
+});
+
+Flight::route('/admin/edit_game/@id', function($id){
+    Flight::render('admin/edit_game', array("id" => $id));
+});
+
 Flight::route('/admin/users', function(){
     Flight::render('admin/users');
 });
@@ -42,6 +50,18 @@ Flight::route('/admin/statistics', function(){
 Flight::route('/admin/CreateGameService', function(){
     $gameService = new GameService();
     $result = $gameService->serviceCreateGame();
+});
+
+Flight::route('/admin/EditGameService/@id', function($id){
+    $gameService = new GameService();
+    $result = $gameService->serviceEditGame($id);
+    Flight::redirect('/admin/game/'.$id);
+});
+
+Flight::route('/admin/DeleteGameService/@id', function($id){
+    $gameService = new GameService();
+    $result = $gameService->serviceDeleteGame($id);
+    Flight::redirect('/admin/games');
 });
 
 

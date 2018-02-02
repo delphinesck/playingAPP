@@ -1,6 +1,8 @@
 <?php 
 echo($header);
 $bddmanager = new BddManager();
+$repo = $bddmanager->getGameRepository();
+$game = $repo->getGameById($id);
 ?>
 
 <!-- MAIN CONTENT -->
@@ -16,9 +18,9 @@ $bddmanager = new BddManager();
                 </a>
             <!-- SUBMIT BUTTON -->
                 <div id="box_submit">
-                    <input type="submit" value="Submit" form="form_game" id="submit_button">
+                    <input type="submit" value="Edit" form="form_game" id="submit_button">
                 </div>
-                <h2>Add a game</h2>
+                <h2>Edit game</h2>
             </div>
 
     <!-- INCOMPLETE MESSAGE -->
@@ -29,7 +31,7 @@ $bddmanager = new BddManager();
 
 
     <!-- FORM -->
-            <form id="form_game" action="../admin/CreateGameService" method="post" enctype="multipart/form-data">
+            <?= "<form id='form_game' action='/WWW/PlayingAPP/API/admin/EditGameService/" . $id . "' method='post' enctype='multipart/form-data'>" ?>
         <!-- DIV 1 -->
                 <div id="main_box_left">
             <!-- TITLE -->
@@ -42,7 +44,7 @@ $bddmanager = new BddManager();
                         </div>
 
                         <div class="box_content">
-                            <input type="text" name="title">
+                            <?= "<input type='text' name='title' value='" . $game->getTitle() . "'>" ?>
                         </div>
                     </div>
 
@@ -57,7 +59,7 @@ $bddmanager = new BddManager();
 
                         <div class="box_content">
                             <label>Cover</label><br />
-                            <input type="file" name="cover"><br />
+                            <input type="file" name="cover">
 
                             <label>Banner</label><br />
                             <input type="file" name="banner">
@@ -77,20 +79,20 @@ $bddmanager = new BddManager();
                             <div>
                                 <label>Estimated time to beat</label>
                                 <div class="number_box">
-                                    <input type="number" name="timeto_beat">hours
+                                    <?= "<input type='number' name='timeto_beat' value='" . $game->getTimeto_beat() . "'>hours" ?>
                                 </div>
                             </div>
 
                             <div class="completion_margin">
                                 <label>Estimated time to 100%</label>
                                 <div class="number_box">
-                                    <input type="number" name="timeto_complete">hours
+                                    <?= "<input type='number' name='timeto_complete' value='" . $game->getTimeto_complete() . "'>hours" ?>
                                 </div>
                             </div>
                             <div class="completion_subbox completion_margin">
                                 <label>Total number of chapters</label>
                                 <span class="number_box">
-                                    <input type="number" name="total_chapters">
+                                    <?= "<input type='number' name='total_chapters' value='" . $game->getTotal_chapters() . "'>" ?>
                                 </span>
                             </div>
                             <div class="completion_subbox">
@@ -98,7 +100,7 @@ $bddmanager = new BddManager();
                                     <div class="form_detail">(PSN, XBOX live, Steam)</div>
                                 </label>
                                 <span class="number_box">
-                                    <input type="number" name="total_trophies">
+                                    <?= "<input type='number' name='total_trophies' value='" . $game->getTotal_trophies() . "'>" ?>
                                 </span>
                             </div>
                         </div>
@@ -120,7 +122,7 @@ $bddmanager = new BddManager();
                             </div>
 
                             <div class="box_content">
-                                <textarea name="summary"></textarea>
+                                <textarea name="summary"><?= $game->getSummary() ?></textarea>
                             </div>
                         </div>
 
@@ -135,13 +137,13 @@ $bddmanager = new BddManager();
 
                             <div class="box_content">
                                 <div class="release_country">JP</div> 
-                                <input type="date" name="release_jp"><br />
+                                <?= "<input type='date' name='release_jp' value='" . $game->getRelease_jp() . "'><br />" ?>
 
                                 <div class="release_country">NA</div> 
-                                <input type="date" name="release_na"><br />
+                                <?= "<input type='date' name='release_na' value='" . $game->getRelease_na() . "'><br />" ?>
 
                                 <div class="release_country">EU</div> 
-                                <input type="date" name="release_eu">
+                                <?= "<input type='date' name='release_eu' value='" . $game->getRelease_eu() . "'><br />" ?>
                             </div>
                         </div>
                     </div>

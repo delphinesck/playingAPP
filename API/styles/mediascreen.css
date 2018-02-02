@@ -1,0 +1,31 @@
+@media screen and (max-width: 1515px){
+
+    /* MAIN BOX */
+    #main_box_margin {
+        width: 1000px;
+    }
+
+    #sub_box_right_top {
+        height: 220px;
+    }
+
+    .type2 {
+        width: 400px;
+    }
+
+    .scrolling {
+        max-height: 140px;
+    }
+
+    textarea {
+        width: 357px;
+        max-width: 357px;
+        height: 110px;
+        max-height: 110px;
+    }
+
+    #button_box {
+        right: 50px;
+    }
+
+}

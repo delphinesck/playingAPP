@@ -7,10 +7,16 @@
     <title>Playing app</title>
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/mediascreen.css">
     <link rel="stylesheet" href="../styles/reset.css">
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/mediascreen.css">
+    <link rel="stylesheet" href="../../styles/reset.css">
+    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../../styles/mediascreen.css">
     <link rel="stylesheet" type="text/css" href="styles/fontawesome-free-5.0.4/web-fonts-with-css/css/fontawesome-all.min.css">
     <link rel="stylesheet" type="text/css" href="../styles/fontawesome-free-5.0.4/web-fonts-with-css/css/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="../../styles/fontawesome-free-5.0.4/web-fonts-with-css/css/fontawesome-all.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
