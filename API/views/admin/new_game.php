@@ -160,8 +160,8 @@ $bddmanager = new BddManager();
                                 <?php
                                 $repo = $bddmanager->getDeveloperRepository();
                                 $developers = $repo->getAllDevelopers();
-                                foreach($developers as $developer){
-                                    echo "<label><input type='checkbox' value='" . $developer->getId() . "' name='developer'>";
+                                foreach($developers as $key=>$developer){
+                                    echo "<label><input type='checkbox' value='" . $developer->getId() . "' name='developers[" . $key . "]'>";
                                     echo $developer->getName() . "</label><br />";
                                 }
                                 ?>
@@ -181,8 +181,8 @@ $bddmanager = new BddManager();
                                 <?php
                                 $repo = $bddmanager->getPublisherRepository();
                                 $publishers = $repo->getAllPublishers();
-                                foreach($publishers as $publisher){
-                                    echo "<label><input type='checkbox' value='" . $publisher->getId() . "' name='publisher'>";
+                                foreach($publishers as $key=>$publisher){
+                                    echo "<label><input type='checkbox' value='" . $publisher->getId() . "' name='publishers[" . $key . "]'>";
                                     echo $publisher->getName() . "</label><br />";
                                 }
                                 ?>
@@ -202,8 +202,8 @@ $bddmanager = new BddManager();
                                 <?php
                                 $repo = $bddmanager->getFranchiseRepository();
                                 $franchises = $repo->getAllFranchises();
-                                foreach($franchises as $franchise){
-                                    echo "<label><input type='checkbox' value='" . $franchise->getId() . "' name='franchise'>";
+                                foreach($franchises as $key=>$franchise){
+                                    echo "<label><input type='checkbox' value='" . $franchise->getId() . "' name='franchises[" . $key . "]'>";
                                     echo $franchise->getName() . "</label><br />";
                                 }
                                 ?>
@@ -223,8 +223,8 @@ $bddmanager = new BddManager();
                                 <?php
                                 $repo = $bddmanager->getSystemRepository();
                                 $systems = $repo->getAllSystems();
-                                foreach($systems as $system){
-                                    echo "<label><input type='checkbox' value='" . $system->getId() . "' name='system'>";
+                                foreach($systems as $key=>$system){
+                                    echo "<label><input type='checkbox' value='" . $system->getId() . "' name='systems[" . $key . "]'>";
                                     echo $system->getFull_name() . "</label><br />";
                                 }
                                 ?>
@@ -244,8 +244,8 @@ $bddmanager = new BddManager();
                                 <?php
                                 $repo = $bddmanager->getLabelRepository();
                                 $labels = $repo->getAllLabels();
-                                foreach($labels as $label){
-                                    echo "<label><input type='checkbox' value='" . $label->getId() . "' name='label'>";
+                                foreach($labels as $key=>$label){
+                                    echo "<label><input type='checkbox' value='" . $label->getId() . "' name='labels[" . $key . "]'>";
                                     echo $label->getName() . "</label><br />";
                                 }
                                 ?>
@@ -265,8 +265,8 @@ $bddmanager = new BddManager();
                                 <?php
                                 $repo = $bddmanager->getThemeRepository();
                                 $themes = $repo->getAllThemes();
-                                foreach($themes as $theme){
-                                    echo "<label><input type='checkbox' value='" . $theme->getId() . "' name='theme'>";
+                                foreach($themes as $key=>$theme){
+                                    echo "<label><input type='checkbox' value='" . $theme->getId() . "' name='themes[" . $key . "]'>";
                                     echo $theme->getTitle() . "</label><br />";
                                 }
                                 ?>

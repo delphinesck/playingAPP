@@ -47,17 +47,22 @@ Flight::route('/admin/statistics', function(){
     Flight::render('admin/statistics');
 });
 
+
+    /* SERVICES */
+/* CREATE A NEW GAME */
 Flight::route('/admin/CreateGameService', function(){
     $gameService = new GameService();
     $result = $gameService->serviceCreateGame();
 });
 
+/* EDIT A GAME */
 Flight::route('/admin/EditGameService/@id', function($id){
     $gameService = new GameService();
     $result = $gameService->serviceEditGame($id);
     Flight::redirect('/admin/game/'.$id);
 });
 
+/* DELETE A GAME */
 Flight::route('/admin/DeleteGameService/@id', function($id){
     $gameService = new GameService();
     $result = $gameService->serviceDeleteGame($id);

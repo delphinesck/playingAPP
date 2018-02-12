@@ -12,6 +12,12 @@ class Game extends Model implements JsonSerializable {
     private $release_eu;
     private $cover;
     private $banner;
+    private $developers;
+    private $publishers;
+    private $franchises;
+    private $systems;
+    private $labels;
+    private $themes;
     
     function setTitle($title) { $this->title = $title; }
     function getTitle() { return $this->title; }
@@ -35,6 +41,18 @@ class Game extends Model implements JsonSerializable {
     function getCover() { return $this->cover; }
     function setBanner($banner) { $this->banner = $banner; }
     function getBanner() { return $this->banner; }
+    function setDevelopers($developers) { $this->developers = $developers; }
+    function getDevelopers() { return $this->developers; }
+    function setPublishers($publishers) { $this->publishers = $publishers; }
+    function getPublishers() { return $this->publishers; }
+    function setFranchises($franchises) { $this->franchises = $franchises; }
+    function getFranchises() { return $this->franchises; }
+    function setSystems($systems) { $this->systems = $systems; }
+    function getSystems() { return $this->systems; }
+    function setLabels($labels) { $this->labels = $labels; }
+    function getLabels() { return $this->labels; }
+    function setThemes($themes) { $this->themes = $themes; }
+    function getThemes() { return $this->themes; }
     
     function jsonSerialize(){
         return [
@@ -49,7 +67,13 @@ class Game extends Model implements JsonSerializable {
             "release_na" => $this->release_na,
             "release_eu" => $this->release_eu,
             "cover" => $this->cover,
-            "banner" => $this->banner
+            "banner" => $this->banner,
+            "developers" => $this->developers,
+            "publishers" => $this->publishers,
+            "franchises" => $this->franchises,
+            "systems" => $this->systems,
+            "labels" => $this->labels,
+            "themes" => $this->themes
         ];
     }
 }

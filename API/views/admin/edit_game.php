@@ -3,6 +3,13 @@ echo($header);
 $bddmanager = new BddManager();
 $repo = $bddmanager->getGameRepository();
 $game = $repo->getGameById($id);
+
+$repoDeveloper = $bddmanager->getDeveloperRepository();
+$repoPublisher = $bddmanager->getPublisherRepository();
+$repoFranchise = $bddmanager->getFranchiseRepository();
+$repoSystem = $bddmanager->getSystemRepository();
+$repoLabel = $bddmanager->getLabelRepository();
+$repoTheme = $bddmanager->getThemeRepository();
 ?>
 
 <!-- MAIN CONTENT -->
@@ -160,10 +167,19 @@ $game = $repo->getGameById($id);
 
                             <div class="box_content scrolling">
                                 <?php
-                                $repo = $bddmanager->getDeveloperRepository();
-                                $developers = $repo->getAllDevelopers();
+                                $developers_ids = $repoDeveloper->getDevelopersByGameId($id);
+                                $developers = $repoDeveloper->getAllDevelopers();
                                 foreach($developers as $developer){
-                                    echo "<label><input type='checkbox' value='" . $developer->getId() . "' name='developer'>";
+                                    echo "<label><input type='checkbox' value='" . $developer->getId() . "' name='developer' ";
+
+                                    foreach($developers_ids as $developer_id){
+                                        $dev_id = $developer_id["developer_id"];
+
+                                        if($dev_id == $developer->getId()){
+                                            echo "checked ";
+                                        }
+                                    }
+                                    echo ">";
                                     echo $developer->getName() . "</label><br />";
                                 }
                                 ?>
@@ -181,10 +197,19 @@ $game = $repo->getGameById($id);
 
                             <div class="box_content scrolling">
                                 <?php
-                                $repo = $bddmanager->getPublisherRepository();
-                                $publishers = $repo->getAllPublishers();
+                                $publishers_ids = $repoPublisher->getPublishersByGameId($id);
+                                $publishers = $repoPublisher->getAllPublishers();
                                 foreach($publishers as $publisher){
-                                    echo "<label><input type='checkbox' value='" . $publisher->getId() . "' name='publisher'>";
+                                    echo "<label><input type='checkbox' value='" . $publisher->getId() . "' name='publisher' ";
+
+                                    foreach($publishers_ids as $publisher_id){
+                                        $pub_id = $publisher_id["publisher_id"];
+
+                                        if($pub_id == $publisher->getId()){
+                                            echo "checked ";
+                                        }
+                                    }
+                                    echo ">";
                                     echo $publisher->getName() . "</label><br />";
                                 }
                                 ?>
@@ -202,10 +227,19 @@ $game = $repo->getGameById($id);
 
                             <div class="box_content scrolling">
                                 <?php
-                                $repo = $bddmanager->getFranchiseRepository();
-                                $franchises = $repo->getAllFranchises();
+                                $franchises_ids = $repoFranchise->getFranchisesByGameId($id);
+                                $franchises = $repoFranchise->getAllFranchises();
                                 foreach($franchises as $franchise){
-                                    echo "<label><input type='checkbox' value='" . $franchise->getId() . "' name='franchise'>";
+                                    echo "<label><input type='checkbox' value='" . $franchise->getId() . "' name='franchise' ";
+
+                                    foreach($franchises_ids as $franchise_id){
+                                        $fra_id = $franchise_id["franchise_id"];
+
+                                        if($fra_id == $franchise->getId()){
+                                            echo "checked ";
+                                        }
+                                    }
+                                    echo ">";
                                     echo $franchise->getName() . "</label><br />";
                                 }
                                 ?>
@@ -223,10 +257,19 @@ $game = $repo->getGameById($id);
 
                             <div class="box_content scrolling">
                                 <?php
-                                $repo = $bddmanager->getSystemRepository();
-                                $systems = $repo->getAllSystems();
+                                $systems_ids = $repoSystem->getSystemsByGameId($id);
+                                $systems = $repoSystem->getAllSystems();
                                 foreach($systems as $system){
-                                    echo "<label><input type='checkbox' value='" . $system->getId() . "' name='system'>";
+                                    echo "<label><input type='checkbox' value='" . $system->getId() . "' name='system' ";
+
+                                    foreach($systems_ids as $system_id){
+                                        $sys_id = $system_id["system_id"];
+
+                                        if($sys_id == $system->getId()){
+                                            echo "checked ";
+                                        }
+                                    }
+                                    echo ">";
                                     echo $system->getFull_name() . "</label><br />";
                                 }
                                 ?>
@@ -244,10 +287,19 @@ $game = $repo->getGameById($id);
 
                             <div class="box_content scrolling">
                                 <?php
-                                $repo = $bddmanager->getLabelRepository();
-                                $labels = $repo->getAllLabels();
+                                $labels_ids = $repoLabel->getLabelsByGameId($id);
+                                $labels = $repoLabel->getAllLabels();
                                 foreach($labels as $label){
-                                    echo "<label><input type='checkbox' value='" . $label->getId() . "' name='label'>";
+                                    echo "<label><input type='checkbox' value='" . $label->getId() . "' name='label' ";
+
+                                    foreach($labels_ids as $label_id){
+                                        $lab_id = $label_id["label_id"];
+
+                                        if($lab_id == $label->getId()){
+                                            echo "checked ";
+                                        }
+                                    }
+                                    echo ">";
                                     echo $label->getName() . "</label><br />";
                                 }
                                 ?>
@@ -265,10 +317,19 @@ $game = $repo->getGameById($id);
 
                             <div class="box_content scrolling">
                                 <?php
-                                $repo = $bddmanager->getThemeRepository();
-                                $themes = $repo->getAllThemes();
+                                $themes_ids = $repoTheme->getThemesByGameId($id);
+                                $themes = $repoTheme->getAllThemes();
                                 foreach($themes as $theme){
-                                    echo "<label><input type='checkbox' value='" . $theme->getId() . "' name='theme'>";
+                                    echo "<label><input type='checkbox' value='" . $theme->getId() . "' name='theme'";
+
+                                    foreach($themes_ids as $theme_id){
+                                        $the_id = $theme_id["theme_id"];
+
+                                        if($the_id == $theme->getId()){
+                                            echo "checked ";
+                                        }
+                                    }
+                                    echo ">";
                                     echo $theme->getTitle() . "</label><br />";
                                 }
                                 ?>
