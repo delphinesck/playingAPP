@@ -39,4 +39,30 @@ class LabelRepository extends Repository {
         
         return $label[0];
     }
+
+    /* CREATE A NEW LABEL */
+    public function createLabel(Label $label){
+        $query = "INSERT INTO labels SET    name=:name, 
+                                            description=:description";
+        $pdo = $this->connection->prepare($query);
+        $pdo->execute(array(
+            'name' => $label->getName(),
+            'description' => $label->getDescription()
+        ));
+    }
+
+    /* CHECK IF ALREADY EXISTS */
+    public function checkName(Label $label){
+        $pdo = $this->connection->prepare("SELECT name FROM labels WHERE name=:name");
+        $pdo->execute(array(
+            'name' => $label->getName()
+        ));
+        $result = $pdo->fetch(PDO::FETCH_ASSOC);
+        if(!empty($result)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

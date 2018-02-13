@@ -65,10 +65,10 @@ $repoTheme = $bddmanager->getThemeRepository();
                         </div>
 
                         <div class="box_content">
-                            <label>Cover</label><br />
+                            <label>Cover</label>
                             <input type="file" name="cover">
 
-                            <label>Banner</label><br />
+                            <label>Banner</label>
                             <input type="file" name="banner">
                         </div>
                     </div>
@@ -180,7 +180,7 @@ $repoTheme = $bddmanager->getThemeRepository();
                                         }
                                     }
                                     echo ">";
-                                    echo $developer->getName() . "</label><br />";
+                                    echo $developer->getName() . "</label>";
                                 }
                                 ?>
                             </div>
@@ -210,7 +210,7 @@ $repoTheme = $bddmanager->getThemeRepository();
                                         }
                                     }
                                     echo ">";
-                                    echo $publisher->getName() . "</label><br />";
+                                    echo $publisher->getName() . "</label>";
                                 }
                                 ?>
                             </div>
@@ -240,7 +240,7 @@ $repoTheme = $bddmanager->getThemeRepository();
                                         }
                                     }
                                     echo ">";
-                                    echo $franchise->getName() . "</label><br />";
+                                    echo $franchise->getName() . "</label>";
                                 }
                                 ?>
                             </div>
@@ -270,7 +270,7 @@ $repoTheme = $bddmanager->getThemeRepository();
                                         }
                                     }
                                     echo ">";
-                                    echo $system->getFull_name() . "</label><br />";
+                                    echo $system->getFull_name() . "</label>";
                                 }
                                 ?>
                             </div>
@@ -300,7 +300,7 @@ $repoTheme = $bddmanager->getThemeRepository();
                                         }
                                     }
                                     echo ">";
-                                    echo $label->getName() . "</label><br />";
+                                    echo $label->getName() . "</label>";
                                 }
                                 ?>
                             </div>
@@ -330,7 +330,7 @@ $repoTheme = $bddmanager->getThemeRepository();
                                         }
                                     }
                                     echo ">";
-                                    echo $theme->getTitle() . "</label><br />";
+                                    echo $theme->getTitle() . "</label>";
                                 }
                                 ?>
                             </div>

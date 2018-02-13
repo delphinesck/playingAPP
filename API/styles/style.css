@@ -115,6 +115,11 @@ h2 {
     top: 10px;
     word-spacing: 5px;
     color: #999;
+    padding: 5px 10px;
+    background-color: white;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 #back_button:hover {
@@ -240,6 +245,95 @@ h3 {
 }
 
 
+
+/* NEW OTHER PAGE */
+#main_box_other {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.textarea_other {
+    width: 257px;
+    max-width: 257px;
+    height: 110px;
+    max-height: 110px;
+}
+
+
+
+/* GAME DETAILS PAGE */
+#main_box_game {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+h4 {
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    padding: 60px 0px;
+    text-shadow: 2px 2px #000000;
+}
+
+h5 {
+    font-family: 'Roboto-bold', sans-serif;
+    word-spacing: 10px;
+}
+
+.box_game {
+    min-width: 280px;
+}
+
+.box_game2 {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gamedetails {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.gamedetails_title {
+    width: 65%;
+    font-family: 'Roboto-bold', sans-serif;
+}
+
+.gamedetails_number {
+    width: 35%;
+}
+
+.space_under {
+    margin-bottom: 20px;
+}
+
+#summary {
+    text-align: justify;
+}
+
+#gamestats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.gamestats_box {
+    width: 150px;
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gamestats_number {
+    font-family: 'Roboto-bold', sans-serif;
+    font-size: 40px;
+}
+
+
+
+
 /* FORMS */
 input[type="text"] {
     border: 1px solid #dedfe0;
@@ -282,6 +376,12 @@ input[type="checkbox"] {
     margin-right: 15px;
 }
 
+input[type="color"] {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
 input[type="submit"] {
     border: none;
     cursor: pointer;
@@ -320,6 +420,10 @@ select {
     -moz-border-radius: 5px;
     border-radius: 5px;
     width: 239px;
+}
+
+label {
+    display: block;
 }
 
 #box_submit {

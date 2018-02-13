@@ -39,4 +39,28 @@ class ThemeRepository extends Repository {
         
         return $theme[0];
     }
+
+    /* CREATE A NEW THEME */
+    public function createTheme(Theme $theme){
+        $query = "INSERT INTO themes SET title=:title";
+        $pdo = $this->connection->prepare($query);
+        $pdo->execute(array(
+            'title' => $theme->getTitle()
+        ));
+    }
+
+    /* CHECK IF ALREADY EXISTS */
+    public function checkTitle(Theme $theme){
+        $pdo = $this->connection->prepare("SELECT title FROM themes WHERE title=:title");
+        $pdo->execute(array(
+            'title' => $theme->getTitle()
+        ));
+        $result = $pdo->fetch(PDO::FETCH_ASSOC);
+        if(!empty($result)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

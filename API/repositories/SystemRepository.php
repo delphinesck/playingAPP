@@ -39,4 +39,36 @@ class SystemRepository extends Repository {
         
         return $system[0];
     }
+
+    /* CREATE A NEW SYSTEM */
+    public function createSystem(System $system){
+        $query = "INSERT INTO systems SET   full_name=:full_name, 
+                                            short_name=:short_name, 
+                                            company=:company, 
+                                            color_bg=:color_bg, 
+                                            color_text=:color_text";
+        $pdo = $this->connection->prepare($query);
+        $pdo->execute(array(
+            'full_name' => $system->getFull_name(),
+            'short_name' => $system->getShort_name(),
+            'company' => $system->getCompany(),
+            'color_bg' => $system->getColor_bg(),
+            'color_text' => $system->getColor_text()
+        ));
+    }
+
+    /* CHECK IF ALREADY EXISTS */
+    public function checkName(System $system){
+        $pdo = $this->connection->prepare("SELECT full_name FROM systems WHERE full_name=:full_name");
+        $pdo->execute(array(
+            'full_name' => $system->getFull_name()
+        ));
+        $result = $pdo->fetch(PDO::FETCH_ASSOC);
+        if(!empty($result)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

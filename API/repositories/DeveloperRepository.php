@@ -35,4 +35,28 @@ class DeveloperRepository extends Repository {
         
         return new Developer($developer);
     }
+
+    /* CREATE A NEW DEVELOPER */
+    public function createDeveloper(Developer $developer){
+        $query = "INSERT INTO developers SET name=:name";
+        $pdo = $this->connection->prepare($query);
+        $pdo->execute(array(
+            'name' => $developer->getName()
+        ));
+    }
+
+    /* CHECK IF ALREADY EXISTS */
+    public function checkName(Developer $developer){
+        $pdo = $this->connection->prepare("SELECT name FROM developers WHERE name=:name");
+        $pdo->execute(array(
+            'name' => $developer->getName()
+        ));
+        $result = $pdo->fetch(PDO::FETCH_ASSOC);
+        if(!empty($result)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

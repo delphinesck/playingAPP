@@ -56,10 +56,10 @@ $bddmanager = new BddManager();
                         </div>
 
                         <div class="box_content">
-                            <label>Cover</label><br />
+                            <label>Cover</label>
                             <input type="file" name="cover"><br />
 
-                            <label>Banner</label><br />
+                            <label>Banner</label>
                             <input type="file" name="banner">
                         </div>
                     </div>
@@ -114,7 +114,7 @@ $bddmanager = new BddManager();
                         <div class="box type2">
                             <div class="form_title">
                                 <div class="form_icon">
-                                <i class="fas fa-align-left"></i>
+                                    <i class="fas fa-align-left"></i>
                                 </div>
                                 <h3>Summary</h3>
                             </div>
@@ -162,7 +162,7 @@ $bddmanager = new BddManager();
                                 $developers = $repo->getAllDevelopers();
                                 foreach($developers as $key=>$developer){
                                     echo "<label><input type='checkbox' value='" . $developer->getId() . "' name='developers[" . $key . "]'>";
-                                    echo $developer->getName() . "</label><br />";
+                                    echo $developer->getName() . "</label>";
                                 }
                                 ?>
                             </div>
@@ -183,7 +183,7 @@ $bddmanager = new BddManager();
                                 $publishers = $repo->getAllPublishers();
                                 foreach($publishers as $key=>$publisher){
                                     echo "<label><input type='checkbox' value='" . $publisher->getId() . "' name='publishers[" . $key . "]'>";
-                                    echo $publisher->getName() . "</label><br />";
+                                    echo $publisher->getName() . "</label>";
                                 }
                                 ?>
                             </div>
@@ -204,7 +204,7 @@ $bddmanager = new BddManager();
                                 $franchises = $repo->getAllFranchises();
                                 foreach($franchises as $key=>$franchise){
                                     echo "<label><input type='checkbox' value='" . $franchise->getId() . "' name='franchises[" . $key . "]'>";
-                                    echo $franchise->getName() . "</label><br />";
+                                    echo $franchise->getName() . "</label>";
                                 }
                                 ?>
                             </div>
@@ -225,7 +225,7 @@ $bddmanager = new BddManager();
                                 $systems = $repo->getAllSystems();
                                 foreach($systems as $key=>$system){
                                     echo "<label><input type='checkbox' value='" . $system->getId() . "' name='systems[" . $key . "]'>";
-                                    echo $system->getFull_name() . "</label><br />";
+                                    echo $system->getFull_name() . "</label>";
                                 }
                                 ?>
                             </div>
@@ -246,7 +246,7 @@ $bddmanager = new BddManager();
                                 $labels = $repo->getAllLabels();
                                 foreach($labels as $key=>$label){
                                     echo "<label><input type='checkbox' value='" . $label->getId() . "' name='labels[" . $key . "]'>";
-                                    echo $label->getName() . "</label><br />";
+                                    echo $label->getName() . "</label>";
                                 }
                                 ?>
                             </div>
@@ -267,7 +267,7 @@ $bddmanager = new BddManager();
                                 $themes = $repo->getAllThemes();
                                 foreach($themes as $key=>$theme){
                                     echo "<label><input type='checkbox' value='" . $theme->getId() . "' name='themes[" . $key . "]'>";
-                                    echo $theme->getTitle() . "</label><br />";
+                                    echo $theme->getTitle() . "</label>";
                                 }
                                 ?>
                             </div>

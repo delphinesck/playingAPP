@@ -69,6 +69,12 @@ Flight::route('/admin/DeleteGameService/@id', function($id){
     Flight::redirect('/admin/games');
 });
 
+/* CREATE A NEW OTHER */
+Flight::route('/admin/CreateOtherService', function(){
+    $otherService = new OtherService();
+    $result = $otherService->serviceCreateOther();
+});
+
 
 Flight::start();
 ?>

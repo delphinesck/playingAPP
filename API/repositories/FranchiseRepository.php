@@ -35,4 +35,28 @@ class FranchiseRepository extends Repository {
         
         return new Franchise($franchise);
     }
+
+    /* CREATE A NEW FRANCHISE */
+    public function createFranchise(Franchise $franchise){
+        $query = "INSERT INTO franchises SET name=:name";
+        $pdo = $this->connection->prepare($query);
+        $pdo->execute(array(
+            'name' => $franchise->getName()
+        ));
+    }
+
+    /* CHECK IF ALREADY EXISTS */
+    public function checkName(Franchise $franchise){
+        $pdo = $this->connection->prepare("SELECT name FROM franchises WHERE name=:name");
+        $pdo->execute(array(
+            'name' => $franchise->getName()
+        ));
+        $result = $pdo->fetch(PDO::FETCH_ASSOC);
+        if(!empty($result)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

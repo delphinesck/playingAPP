@@ -35,4 +35,28 @@ class PublisherRepository extends Repository {
         
         return new Publisher($publisher);
     }
+
+    /* CREATE A NEW PUBLISHER */
+    public function createPublisher(Publisher $publisher){
+        $query = "INSERT INTO publishers SET name=:name";
+        $pdo = $this->connection->prepare($query);
+        $pdo->execute(array(
+            'name' => $publisher->getName()
+        ));
+    }
+
+    /* CHECK IF ALREADY EXISTS */
+    public function checkName(Publisher $publisher){
+        $pdo = $this->connection->prepare("SELECT name FROM publishers WHERE name=:name");
+        $pdo->execute(array(
+            'name' => $publisher->getName()
+        ));
+        $result = $pdo->fetch(PDO::FETCH_ASSOC);
+        if(!empty($result)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
