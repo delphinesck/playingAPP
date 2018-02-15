@@ -388,13 +388,17 @@ input[type="submit"] {
 }
 
 #submit_button {
-    padding: 10px 15px;
+    padding: 5px 10px;
     font-size: 15px;
     background-color: #00a5fd;
     color: white;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+}
+
+#submit_button:hover {
+    background-color: #74b9ff;
 }
 
 textarea {
@@ -428,8 +432,8 @@ label {
 
 #box_submit {
     position: absolute;
-    top: 0;
     right: 20px;
+    top: 10px;
     cursor: pointer;
 }
 

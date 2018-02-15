@@ -14,7 +14,7 @@ class PublisherRepository extends Repository {
         return $publishers;
     }
 
-    /* GET A GAME'S PUBLISHERS */
+    /* GET A GAME'S PUBLISHERS IDS */
     public function getPublishersByGameId($id){
         $pdo = $this->connection->prepare("SELECT publisher_id FROM games_publishers WHERE game_id=:id");
         $pdo->execute(array(
@@ -45,7 +45,7 @@ class PublisherRepository extends Repository {
         ));
     }
 
-    /* CHECK IF ALREADY EXISTS */
+    /* CHECK IF A PUBLISHER ALREADY EXISTS IN THE DATABASE */
     public function checkName(Publisher $publisher){
         $pdo = $this->connection->prepare("SELECT name FROM publishers WHERE name=:name");
         $pdo->execute(array(
@@ -57,6 +57,66 @@ class PublisherRepository extends Repository {
         }
         else{
             return false;
+        }
+    }
+
+    /* DELETE ALL PUBLISHERS WITH THIS GAME ID */
+    public function deletePublishersByGameId(Game $game){
+        $prepared = $this->connection->prepare("DELETE FROM games_publishers WHERE game_id=:game_id");
+        $prepared->execute(array(
+            'game_id' => $game->getId()
+        ));
+    }
+
+    /* CHECK PUBLISHERS IN (games_publishers) */
+    public function checkPublishers(Game $game){
+        $publishers_ids = $game->getPublishers();
+
+        /* SELECT ALL THE PUBLISHER_IDS ASSOCIATED TO THE GAME ID FROM THE TABLE */
+        foreach($publishers_ids as $key=>$publisher_id){
+            $pdo = $this->connection->prepare("SELECT * FROM games_publishers WHERE game_id=:game_id AND publisher_id=:publisher_id");
+            $pdo->execute(array(
+                'game_id' => $game->getId(),
+                'publisher_id' => $publisher_id
+            ));
+            $result = $pdo->fetch(PDO::FETCH_ASSOC);
+            /* IF THEY DON'T ALREADY EXIST, INSERT THE PUBLISHER_IDS INTO THE TABLE */
+            if(empty($result)){
+                $query = "INSERT INTO games_publishers SET game_id=:game_id, publisher_id=:publisher_id";
+                $pdo = $this->connection->prepare($query);
+                $pdo->execute(array(
+                    'game_id' => $game->getId(),
+                    'publisher_id' => $publisher_id
+                ));
+            }
+        }
+
+        /* SELECT ALL THE PUBLISHER_IDS ASSOCIATED TO THE GAME ID */
+        $pdo = $this->connection->prepare("SELECT * FROM games_publishers WHERE game_id=:game_id");
+        $pdo->execute(array(
+            'game_id' => $game->getId()
+        ));
+        $content = $pdo->fetchAll(PDO::FETCH_ASSOC);
+
+        /* IF THERE ARE PUBLISHER_IDS */
+        if(isset($content)){
+            foreach($content as $pub){
+                $flag = false;
+                /* DO NOTHING IF THE PUBLISHER HAS BEEN CHECKED */
+                foreach($publishers_ids as $key=>$publisher_id){
+                    if($pub["publisher_id"] == $publisher_id){
+                        $flag = true;
+                    }
+                }
+                /* DELETE IT FROM THE TABLE IF IT WASN'T CHECKED */
+                if($flag == false){
+                    $prepared = $this->connection->prepare("DELETE FROM games_publishers WHERE publisher_id=:publisher_id AND game_id=:game_id");
+                    $prepared->execute(array(
+                        'publisher_id' => $pub["publisher_id"],
+                        'game_id' => $game->getId()
+                    ));
+                }
+            }
         }
     }
 }

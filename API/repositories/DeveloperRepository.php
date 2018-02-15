@@ -45,7 +45,7 @@ class DeveloperRepository extends Repository {
         ));
     }
 
-    /* CHECK IF ALREADY EXISTS */
+    /* CHECK IF A DEVELOPER ALREADY EXISTS IN THE DATABASE */
     public function checkName(Developer $developer){
         $pdo = $this->connection->prepare("SELECT name FROM developers WHERE name=:name");
         $pdo->execute(array(
@@ -57,6 +57,66 @@ class DeveloperRepository extends Repository {
         }
         else{
             return false;
+        }
+    }
+
+    /* DELETE ALL DEVELOPERS WITH THIS GAME ID */
+    public function deleteDevelopersByGameId(Game $game){
+        $prepared = $this->connection->prepare("DELETE FROM games_developers WHERE game_id=:game_id");
+        $prepared->execute(array(
+            'game_id' => $game->getId()
+        ));
+    }
+
+    /* CHECK DEVELOPERS IN (games_developers) */
+    public function checkDevelopers(Game $game){
+        $developers_ids = $game->getDevelopers();
+        
+        /* SELECT ALL THE DEVELOPER_IDS ASSOCIATED TO THE GAME ID FROM THE TABLE */
+        foreach($developers_ids as $key=>$developer_id){
+            $pdo = $this->connection->prepare("SELECT * FROM games_developers WHERE game_id=:game_id AND developer_id=:developer_id");
+            $pdo->execute(array(
+                'game_id' => $game->getId(),
+                'developer_id' => $developer_id
+            ));
+            $result = $pdo->fetch(PDO::FETCH_ASSOC);
+            /* IF THEY DON'T ALREADY EXIST, INSERT THE DEVELOPER_IDS INTO THE TABLE */
+            if(empty($result)){
+                $query = "INSERT INTO games_developers SET game_id=:game_id, developer_id=:developer_id";
+                $pdo = $this->connection->prepare($query);
+                $pdo->execute(array(
+                    'game_id' => $game->getId(),
+                    'developer_id' => $developer_id
+                ));
+            }
+        }
+
+        /* SELECT ALL THE DEVELOPER_IDS ASSOCIATED TO THE GAME ID */
+        $pdo = $this->connection->prepare("SELECT * FROM games_developers WHERE game_id=:game_id");
+        $pdo->execute(array(
+            'game_id' => $game->getId()
+        ));
+        $content = $pdo->fetchAll(PDO::FETCH_ASSOC);
+
+        /* IF THERE ARE DEVELOPER_IDS */
+        if(isset($content)){
+            foreach($content as $dev){
+                $flag = false;
+                /* DO NOTHING IF THE DEVELOPER HAS BEEN CHECKED */
+                foreach($developers_ids as $key=>$developer_id){
+                    if($dev["developer_id"] == $developer_id){
+                        $flag = true;
+                    }
+                }
+                /* DELETE IT FROM THE TABLE IF IT WASN'T CHECKED */
+                if($flag == false){
+                    $prepared = $this->connection->prepare("DELETE FROM games_developers WHERE developer_id=:developer_id AND game_id=:game_id");
+                    $prepared->execute(array(
+                        'developer_id' => $dev["developer_id"],
+                        'game_id' => $game->getId()
+                    ));
+                }
+            }
         }
     }
 }

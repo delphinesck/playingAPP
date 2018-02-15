@@ -174,6 +174,21 @@ class GameRepository extends Repository {
         }
     }
 
+    /* CHECK IF A GAME ALREADY EXISTS IN THE DATABASE */
+    public function checkTitle(Game $game){
+        $pdo = $this->connection->prepare("SELECT title FROM games WHERE title=:title");
+        $pdo->execute(array(
+            'title' => $game->getTitle()
+        ));
+        $result = $pdo->fetch(PDO::FETCH_ASSOC);
+        if(!empty($result)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     /* DELETE A GAME */
     public function deleteGame(Game $game){
         $prepared = $this->connection->prepare("DELETE FROM games WHERE id=:id");

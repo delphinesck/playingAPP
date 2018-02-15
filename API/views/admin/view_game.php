@@ -31,15 +31,18 @@ $repoTheme = $bddmanager->getThemeRepository();
                 <a href="/WWW/PlayingAPP/API/admin/games">
                     <div id="back_button"><i class="fas fa-angle-left"></i> Back</div>
                 </a>
-            <!-- TITLE -->
-                <?= "<h4>" . $game->getTitle() . "</h4>" ?>
 
             <!-- EDIT BUTTON -->
-                <?= "<a href='/WWW/PlayingAPP/API/admin/edit_game/" . $game->getId() . "'>" ?>
-                    <div id="submit_button">
-                        Edit
-                    </div>
-                </a>
+                <div id="box_submit">
+                    <?= "<a href='/WWW/PlayingAPP/API/admin/edit_game/" . $game->getId() . "'>" ?>
+                        <div id="submit_button">
+                            Edit
+                        </div>
+                    </a>
+                </div>
+
+            <!-- TITLE -->
+                <?= "<h4>" . $game->getTitle() . "</h4>" ?>
             </div>
 
             <div id="main_box_game">

@@ -51,7 +51,7 @@ class LabelRepository extends Repository {
         ));
     }
 
-    /* CHECK IF ALREADY EXISTS */
+    /* CHECK IF A LABEL ALREADY EXISTS IN THE DATABASE */
     public function checkName(Label $label){
         $pdo = $this->connection->prepare("SELECT name FROM labels WHERE name=:name");
         $pdo->execute(array(
@@ -63,6 +63,66 @@ class LabelRepository extends Repository {
         }
         else{
             return false;
+        }
+    }
+
+    /* DELETE ALL LABELS WITH THIS GAME ID */
+    public function deleteLabelsByGameId(Game $game){
+        $prepared = $this->connection->prepare("DELETE FROM games_labels WHERE game_id=:game_id");
+        $prepared->execute(array(
+            'game_id' => $game->getId()
+        ));
+    }
+
+    /* CHECK LABELS IN (games_labels) */
+    public function checkLabels(Game $game){
+        $labels_ids = $game->getLabels();
+        
+        /* SELECT ALL THE LABEL_IDS ASSOCIATED TO THE GAME ID FROM THE TABLE */
+        foreach($labels_ids as $key=>$label_id){
+            $pdo = $this->connection->prepare("SELECT * FROM games_labels WHERE game_id=:game_id AND label_id=:label_id");
+            $pdo->execute(array(
+                'game_id' => $game->getId(),
+                'label_id' => $label_id
+            ));
+            $result = $pdo->fetch(PDO::FETCH_ASSOC);
+            /* IF THEY DON'T ALREADY EXIST, INSERT THE LABEL_IDS INTO THE TABLE */
+            if(empty($result)){
+                $query = "INSERT INTO games_labels SET game_id=:game_id, label_id=:label_id";
+                $pdo = $this->connection->prepare($query);
+                $pdo->execute(array(
+                    'game_id' => $game->getId(),
+                    'label_id' => $label_id
+                ));
+            }
+        }
+
+        /* SELECT ALL THE LABEL_IDS ASSOCIATED TO THE GAME ID */
+        $pdo = $this->connection->prepare("SELECT * FROM games_labels WHERE game_id=:game_id");
+        $pdo->execute(array(
+            'game_id' => $game->getId()
+        ));
+        $content = $pdo->fetchAll(PDO::FETCH_ASSOC);
+
+        /* IF THERE ARE LABEL_IDS */
+        if(isset($content)){
+            foreach($content as $lab){
+                $flag = false;
+                /* DO NOTHING IF THE LABEL HAS BEEN CHECKED */
+                foreach($labels_ids as $key=>$label_id){
+                    if($lab["label_id"] == $label_id){
+                        $flag = true;
+                    }
+                }
+                /* DELETE IT FROM THE TABLE IF IT WASN'T CHECKED */
+                if($flag == false){
+                    $prepared = $this->connection->prepare("DELETE FROM games_labels WHERE label_id=:label_id AND game_id=:game_id");
+                    $prepared->execute(array(
+                        'label_id' => $lab["label_id"],
+                        'game_id' => $game->getId()
+                    ));
+                }
+            }
         }
     }
 }

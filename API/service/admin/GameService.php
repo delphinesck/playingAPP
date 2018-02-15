@@ -119,11 +119,11 @@ class GameService {
         }
     }
 
-    /* GAME INFORMATIONS EDITION */
+    /* GAME EDITION */
     public function serviceEditGame($id){
         $bddmanager = new BddManager();
-        $repo = $bddmanager->getGameRepository();
-        $game = $repo->getGameById($id);
+        $repoGame = $bddmanager->getGameRepository();
+        $game = $repoGame->getGameById($id);
         $game = new Game();
         $game->setId($id);
         $game->setTitle($_POST["title"]);
@@ -136,6 +136,85 @@ class GameService {
         $game->setRelease_na($_POST["release_na"]);
         $game->setRelease_eu($_POST["release_eu"]);
 
+        /* CHECK DEVELOPERS */
+        $repoDeveloper = $bddmanager->getDeveloperRepository();
+        $developers_ids_db = $repoDeveloper->getDevelopersByGameId($id);
+        /* CHECK IF CHECKBOXES HAVE BEEN CHECKED */
+        if(isset($_POST["developers"])){
+            $game->setDevelopers($_POST["developers"]);
+            $developers = $repoDeveloper->checkDevelopers($game);
+        }
+        /* IF NOT, DELETE ALL DEVELOPERS ASSOCIATED TO THE GAME ID IN (games_developers) */
+        else{
+            $repoDeveloper->deleteDevelopersByGameId($game);
+        }
+
+        /* CHECK PUBLISHERS */
+        $repoPublisher = $bddmanager->getPublisherRepository();
+        $publishers_ids_db = $repoPublisher->getPublishersByGameId($id);
+        /* CHECK IF CHECKBOXES HAVE BEEN CHECKED */
+        if(isset($_POST["publishers"])){
+            $game->setPublishers($_POST["publishers"]);
+            $publishers = $repoPublisher->checkPublishers($game);
+        }
+        /* IF NOT, DELETE ALL PUBLISHERS ASSOCIATED TO THE GAME ID IN (games_publishers) */
+        else{
+            $repoPublisher->deletePublishersByGameId($game);
+        }
+
+        /* CHECK FRANCHISE */
+        $repoFranchise = $bddmanager->getFranchiseRepository();
+        $franchises_ids_db = $repoFranchise->getFranchisesByGameId($id);
+        /* CHECK IF CHECKBOXES HAVE BEEN CHECKED */
+        if(isset($_POST["franchises"])){
+            $game->setFranchises($_POST["franchises"]);
+            $franchises = $repoFranchise->checkFranchises($game);
+        }
+        /* IF NOT, DELETE ALL FRANCHISES ASSOCIATED TO THE GAME ID IN (games_franchises) */
+        else{
+            $repoFranchise->deleteFranchisesByGameId($game);
+        }
+
+        /* CHECK SYSTEMS */
+        $repoSystem = $bddmanager->getSystemRepository();
+        $systems_ids_db = $repoSystem->getSystemsByGameId($id);
+        /* CHECK IF CHECKBOXES HAVE BEEN CHECKED */
+        if(isset($_POST["systems"])){
+            $game->setSystems($_POST["systems"]);
+            $systems = $repoSystem->checkSystems($game);
+        }
+        /* IF NOT, DELETE ALL SYSTEMS ASSOCIATED TO THE GAME ID IN (games_systems) */
+        else{
+            $repoSystem->deleteSystemsByGameId($game);
+        }
+
+        /* CHECK LABELS */
+        $repoLabel = $bddmanager->getLabelRepository();
+        $labels_ids_db = $repoLabel->getLabelsByGameId($id);
+        /* CHECK IF CHECKBOXES HAVE BEEN CHECKED */
+        if(isset($_POST["labels"])){
+            $game->setLabels($_POST["labels"]);
+            $labels = $repoLabel->checkLabels($game);
+        }
+        /* IF NOT, DELETE ALL LABELS ASSOCIATED TO THE GAME ID IN (games_labels) */
+        else{
+            $repoLabel->deleteLabelsByGameId($game);
+        }
+
+        /* CHECK THEMES */
+        $repoTheme = $bddmanager->getThemeRepository();
+        $themes_ids_db = $repoTheme->getThemesByGameId($id);
+        /* CHECK IF CHECKBOXES HAVE BEEN CHECKED */
+        if(isset($_POST["themes"])){
+            $game->setThemes($_POST["themes"]);
+            $themes = $repoTheme->checkThemes($game);
+        }
+        /* IF NOT, DELETE ALL THEMES ASSOCIATED TO THE GAME ID IN (games_themes) */
+        else{
+            $repoTheme->deleteThemesByGameId($game);
+        }
+
+        /* COVER AND BANNER EDITION IF FILES HAVE BEEN UPLOADED */
         if(!empty($_FILES["cover"])){
             $url = $this->dlFile($_FILES["cover"]);
             if(empty($this->error)){
@@ -152,7 +231,7 @@ class GameService {
             $this->error = null;
         }
 
-        $repo->editGame($game);
+        $repoGame->editGame($game);
     }
 
     /* GAME DELETION */

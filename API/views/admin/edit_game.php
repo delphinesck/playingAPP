@@ -169,8 +169,8 @@ $repoTheme = $bddmanager->getThemeRepository();
                                 <?php
                                 $developers_ids = $repoDeveloper->getDevelopersByGameId($id);
                                 $developers = $repoDeveloper->getAllDevelopers();
-                                foreach($developers as $developer){
-                                    echo "<label><input type='checkbox' value='" . $developer->getId() . "' name='developer' ";
+                                foreach($developers as $key=>$developer){
+                                    echo "<label><input type='checkbox' value='" . $developer->getId() . "' name='developers[" . $key . "]' ";
 
                                     foreach($developers_ids as $developer_id){
                                         $dev_id = $developer_id["developer_id"];
@@ -199,8 +199,8 @@ $repoTheme = $bddmanager->getThemeRepository();
                                 <?php
                                 $publishers_ids = $repoPublisher->getPublishersByGameId($id);
                                 $publishers = $repoPublisher->getAllPublishers();
-                                foreach($publishers as $publisher){
-                                    echo "<label><input type='checkbox' value='" . $publisher->getId() . "' name='publisher' ";
+                                foreach($publishers as $key=>$publisher){
+                                    echo "<label><input type='checkbox' value='" . $publisher->getId() . "' name='publishers[" . $key . "]' ";
 
                                     foreach($publishers_ids as $publisher_id){
                                         $pub_id = $publisher_id["publisher_id"];
@@ -229,8 +229,8 @@ $repoTheme = $bddmanager->getThemeRepository();
                                 <?php
                                 $franchises_ids = $repoFranchise->getFranchisesByGameId($id);
                                 $franchises = $repoFranchise->getAllFranchises();
-                                foreach($franchises as $franchise){
-                                    echo "<label><input type='checkbox' value='" . $franchise->getId() . "' name='franchise' ";
+                                foreach($franchises as $key=>$franchise){
+                                    echo "<label><input type='checkbox' value='" . $franchise->getId() . "' name='franchises[" . $key . "]' ";
 
                                     foreach($franchises_ids as $franchise_id){
                                         $fra_id = $franchise_id["franchise_id"];
@@ -259,8 +259,8 @@ $repoTheme = $bddmanager->getThemeRepository();
                                 <?php
                                 $systems_ids = $repoSystem->getSystemsByGameId($id);
                                 $systems = $repoSystem->getAllSystems();
-                                foreach($systems as $system){
-                                    echo "<label><input type='checkbox' value='" . $system->getId() . "' name='system' ";
+                                foreach($systems as $key=>$system){
+                                    echo "<label><input type='checkbox' value='" . $system->getId() . "' name='systems[" . $key . "]' ";
 
                                     foreach($systems_ids as $system_id){
                                         $sys_id = $system_id["system_id"];
@@ -289,8 +289,8 @@ $repoTheme = $bddmanager->getThemeRepository();
                                 <?php
                                 $labels_ids = $repoLabel->getLabelsByGameId($id);
                                 $labels = $repoLabel->getAllLabels();
-                                foreach($labels as $label){
-                                    echo "<label><input type='checkbox' value='" . $label->getId() . "' name='label' ";
+                                foreach($labels as $key=>$label){
+                                    echo "<label><input type='checkbox' value='" . $label->getId() . "' name='labels[" . $key . "]' ";
 
                                     foreach($labels_ids as $label_id){
                                         $lab_id = $label_id["label_id"];
@@ -319,8 +319,8 @@ $repoTheme = $bddmanager->getThemeRepository();
                                 <?php
                                 $themes_ids = $repoTheme->getThemesByGameId($id);
                                 $themes = $repoTheme->getAllThemes();
-                                foreach($themes as $theme){
-                                    echo "<label><input type='checkbox' value='" . $theme->getId() . "' name='theme'";
+                                foreach($themes as $key=>$theme){
+                                    echo "<label><input type='checkbox' value='" . $theme->getId() . "' name='themes[" . $key . "]'";
 
                                     foreach($themes_ids as $theme_id){
                                         $the_id = $theme_id["theme_id"];
