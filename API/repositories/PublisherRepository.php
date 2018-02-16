@@ -2,9 +2,21 @@
 
 class PublisherRepository extends Repository {
 
-    /* GET ALL PUBLISHERS */
+    /* GET ALL PUBLISHERS ORDERED BY NAME */
     public function getAllPublishers(){
         $query = "SELECT * FROM publishers ORDER BY name";
+        $result = $this->connection->query($query);
+        $result = $result->fetchAll(PDO::FETCH_ASSOC);
+        $publishers = [];
+        foreach($result as $data){
+            $publishers[] = new Publisher($data);
+        }
+        return $publishers;
+    }
+
+    /* GET ALL PUBLISHERS ORDERED BY ID */
+    public function getAllPublishersOrderedById(){
+        $query = "SELECT * FROM publishers ORDER BY id";
         $result = $this->connection->query($query);
         $result = $result->fetchAll(PDO::FETCH_ASSOC);
         $publishers = [];
@@ -118,5 +130,22 @@ class PublisherRepository extends Repository {
                 }
             }
         }
+    }
+
+    /* EDIT A PUBLISHER */
+    public function editPublisher(Publisher $publisher){
+        $prepared = $this->connection->prepare("UPDATE publishers SET name=:name WHERE id=:id");
+        $prepared->execute(array(
+            'id' => $publisher->getId(),
+            'name' => $publisher->getName()
+        ));
+    }
+
+    /* DELETE A PUBLISHER */
+    public function deletePublisher(Publisher $publisher){
+        $prepared = $this->connection->prepare("DELETE FROM publishers WHERE id=:id");
+        $prepared->execute(array(
+            'id' => $publisher->getId()
+        ));
     }
 }

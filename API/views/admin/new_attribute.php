@@ -8,14 +8,14 @@
     <!-- TITLE -->
             <div id="main_title_box">
             <!-- BACK BUTTON -->
-                <a href="/WWW/PlayingAPP/API/admin/games">
+                <a href="/WWW/PlayingAPP/API/admin/attributes">
                     <div id="back_button"><i class="fas fa-angle-left"></i> Back</div>
                 </a>
             <!-- SUBMIT BUTTON -->
                 <div id="box_submit">
-                    <input type="submit" value="Submit" form="form_other" id="submit_button">
+                    <input type="submit" value="Submit" form="form_attributes" id="submit_button">
                 </div>
-                <h2>Add other</h2>
+                <h2>Add attributes</h2>
             </div>
 
     <!-- ERROR MESSAGES -->
@@ -48,10 +48,10 @@
 
 
     <!-- FORM -->
-            <form id="form_other" action="../admin/CreateOtherService" method="post">
-                <div id="main_box_other">
+            <form id="form_attributes" action="../admin/CreateAttributeService" method="post">
+                <div id="main_box_attributes">
 
-                    <div class="sub_box_other">
+                    <div class="sub_box_attributes">
                 <!-- ADD A DEVELOPER -->
                         <div class="box">
                             <div class="form_title">
@@ -96,7 +96,7 @@
 
                     </div>
 
-                    <div class="sub_box_other">
+                    <div class="sub_box_attributes">
                 <!-- ADD A THEME -->
                         <div class="box">
                             <div class="form_title">
@@ -124,7 +124,7 @@
                                 <label>Name</label>
                                 <input type="text" name="label_name"><br />
                                 <label>Description</label>
-                                <textarea class="textarea_other" name="label_description"></textarea>
+                                <textarea class="textarea_attributes" name="label_description"></textarea>
                             </div>
                         </div>
                     </div>

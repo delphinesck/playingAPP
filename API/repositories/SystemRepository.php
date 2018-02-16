@@ -14,6 +14,18 @@ class SystemRepository extends Repository {
         return $systems;
     }
 
+    /* GET ALL SYSTEMS ORDERED BY ID */
+    public function getAllSystemsOrderedById(){
+        $query = "SELECT * FROM systems ORDER BY id";
+        $result = $this->connection->query($query);
+        $result = $result->fetchAll(PDO::FETCH_ASSOC);
+        $systems = [];
+        foreach($result as $data){
+            $systems[] = new System($data);
+        }
+        return $systems;
+    }
+
     /* GET A GAME'S SYSTEMS */
     public function getSystemsByGameId($id){
         $pdo = $this->connection->prepare("SELECT system_id FROM games_systems WHERE game_id=:id");
@@ -130,5 +142,32 @@ class SystemRepository extends Repository {
                 }
             }
         }
+    }
+
+    /* EDIT A SYSTEM */
+    public function editSystem(System $system){
+        $prepared = $this->connection->prepare("UPDATE systems 
+                                                SET full_name=:full_name,
+                                                short_name=:short_name,
+                                                company=:company,
+                                                color_bg=:color_bg,
+                                                color_text=:color_text 
+                                                WHERE id=:id");
+        $prepared->execute(array(
+            'id' => $system->getId(),
+            'full_name' => $system->getFull_name(),
+            'short_name' => $system->getShort_name(),
+            'company' => $system->getCompany(),
+            'color_bg' => $system->getColor_bg(),
+            'color_text' => $system->getColor_text()
+        ));
+    }
+
+    /* DELETE A SYSTEM */
+    public function deleteSystem(System $system){
+        $prepared = $this->connection->prepare("DELETE FROM systems WHERE id=:id");
+        $prepared->execute(array(
+            'id' => $system->getId()
+        ));
     }
 }

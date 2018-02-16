@@ -62,6 +62,19 @@
     </div>
 
     <div class="nav_item">
+        <a href="/WWW/PlayingAPP/API/admin/attributes">
+        <div class="nav_link">
+            <div class="nav_icon">
+                <i class="fas fa-tags"></i>
+            </div>
+            <div class="nav_title">
+                Attributes
+            </div>
+        </div>
+        </a>
+    </div>
+
+    <div class="nav_item">
         <a href="/WWW/PlayingAPP/API/admin/users">
         <div class="nav_link">
             <div class="nav_icon">

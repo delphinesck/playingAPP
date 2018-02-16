@@ -5,6 +5,9 @@ class GameService {
 
     /* GAME CREATION */
     public function serviceCreateGame(){
+        $bddmanager = new BddManager();
+        $repo = $bddmanager->getGameRepository();
+
         /* ERROR MESSAGE IF THE TITLE AND SUMMARY ARE EMPTY (DOESN'T INSERT INTO THE DATABASE) */
         if(empty($_POST["title"])){
             $paramserror = "incomplete=1";
@@ -12,9 +15,11 @@ class GameService {
                 Flight::redirect('/admin/new_game?'.$paramserror);
             }
         }
-    
-        /* IF AT LEAST THE TITLE AND SUMMARY ARE ENTERED, THE GAME CAN BE INSERTED INTO THE DATABASE */
-        else {
+
+        /* CHECK IF GAME ALREADY EXISTS */
+        $result = $repo->checkTitle($_POST["title"]);
+        if($result == false){
+            /* IF AT LEAST THE TITLE AND SUMMARY ARE ENTERED, THE GAME CAN BE INSERTED INTO THE DATABASE */
             $title = $_POST["title"];
             $summary = $_POST["summary"];
             $timeto_beat = $_POST["timeto_beat"];
@@ -87,10 +92,22 @@ class GameService {
             }
             $this->error = null;
     
-            $bddmanager = new BddManager();
-            $repo = $bddmanager->getGameRepository();
+
             $repo->createGame($game);
-    
+        }
+
+        else{
+            if(empty($errors)){
+                $errors = "?error=1";
+            }
+            $errors .= "&title=" . $_POST["title"];
+        }
+
+        if(isset($errors)){
+            Flight::redirect('/admin/new_game' . $errors);
+        }
+
+        else{
             Flight::redirect('/admin/games');
         }
     }

@@ -1,8 +1,8 @@
 <?php 
 echo($header);
 $bddmanager = new BddManager();
-$repo = $bddmanager->getGameRepository();
-$games = $repo->getAllGames();
+$repo = $bddmanager->getLabelRepository();
+$labels = $repo->getAllLabelsOrderedById();
 ?>
 
 <!-- MAIN CONTENT -->
@@ -12,14 +12,14 @@ $games = $repo->getAllGames();
 
     <!-- TITLE -->
             <div id="main_title_box">
-                <h2>Games</h2>
+                <h2>Labels</h2>
 
             <!-- BUTTONS -->
                 <div id="button_box">
-                    <a href="/WWW/PlayingAPP/API/admin/new_game">
-                        <div class="add game">
+                    <a href="/WWW/PlayingAPP/API/admin/new_attribute">
+                        <div class="add attributes">
                             <i class="fas fa-plus"></i>
-                            Add game
+                            Add label
                         </div>
                     </a>
                 </div>
@@ -29,23 +29,23 @@ $games = $repo->getAllGames();
             <table>
                 <tr>
                     <th class="table_id">#</th>
-                    <th class="table_title">Game title</th>
-                    <th></th>
+                    <th class="table_name">Label name</th>
+                    <th class="table_description">Description</th>
                     <th></th>
                     <th></th>
                 </tr>
 
                 <?php
-                foreach($games as $game){
+                foreach($labels as $label){
                 ?>
 
                     <tr>
-                    <?= "<td class='table_id'>" . $game->getId() . "</td>" ?>
-                    <?= "<td class='table_title'>" . $game->getTitle() . "</td>" ?>
-                    <?= "<td><a href='/WWW/PlayingAPP/API/admin/game/" . $game->getId() . "'><button class='small_buttons view'>View</button></a></td>" ?>
-                    <?= "<td><a href='/WWW/PlayingAPP/API/admin/edit_game/" . $game->getId() . "'><button class='small_buttons edit'>Edit</button></a></td>" ?>
+                    <?= "<td class='table_id'>" . $label->getId() . "</td>" ?>
+                    <?= "<td class='table_name'>" . $label->getName() . "</td>" ?>
+                    <?= "<td class='table_description'>" . $label->getDescription() . "</td>" ?>
+                    <?= "<td><a href='/WWW/PlayingAPP/API/admin/edit_label/" . $label->getId() . "'><button class='small_buttons edit'>Edit</button></a></td>" ?>
                     <td>
-                        <?= "<form action='/WWW/PlayingAPP/API/admin/DeleteGameService/" . $game->getId() . "' method='post'>" ?>
+                        <?= "<form action='/WWW/PlayingAPP/API/admin/DeleteLabelService/" . $label->getId() . "' method='post'>" ?>
                             <input type='submit' value='Delete' class='small_buttons delete' />
                         </form>
                     </td>
@@ -55,6 +55,7 @@ $games = $repo->getAllGames();
                 } 
                 ?>
             </table>
+
         </div>
     </div>
 </main>

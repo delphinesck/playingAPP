@@ -2,9 +2,21 @@
 
 class DeveloperRepository extends Repository {
 
-    /* GET ALL DEVELOPERS */
+    /* GET ALL DEVELOPERS ORDERED BY NAME */
     public function getAllDevelopers(){
         $query = "SELECT * FROM developers ORDER BY name";
+        $result = $this->connection->query($query);
+        $result = $result->fetchAll(PDO::FETCH_ASSOC);
+        $developers = [];
+        foreach($result as $data){
+            $developers[] = new Developer($data);
+        }
+        return $developers;
+    }
+
+    /* GET ALL DEVELOPERS ORDERED BY ID */
+    public function getAllDevelopersOrderedById(){
+        $query = "SELECT * FROM developers ORDER BY id";
         $result = $this->connection->query($query);
         $result = $result->fetchAll(PDO::FETCH_ASSOC);
         $developers = [];
@@ -119,4 +131,22 @@ class DeveloperRepository extends Repository {
             }
         }
     }
+
+    /* EDIT A DEVELOPER */
+    public function editDeveloper(Developer $developer){
+        $prepared = $this->connection->prepare("UPDATE developers SET name=:name WHERE id=:id");
+        $prepared->execute(array(
+            'id' => $developer->getId(),
+            'name' => $developer->getName()
+        ));
+    }
+
+    /* DELETE A DEVELOPER */
+    public function deleteDeveloper(Developer $developer){
+        $prepared = $this->connection->prepare("DELETE FROM developers WHERE id=:id");
+        $prepared->execute(array(
+            'id' => $developer->getId()
+        ));
+    }
+
 }

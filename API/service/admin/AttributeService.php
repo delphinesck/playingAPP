@@ -1,9 +1,9 @@
 <?php
 
-class OtherService {
+class AttributeService {
 
-    /* OTHER CREATION */
-    public function serviceCreateOther(){
+    /* ATTRIBUTES CREATION */
+    public function serviceCreateAttribute(){
         $bddmanager = new BddManager();
 
         /* DEVELOPER */
@@ -168,12 +168,155 @@ class OtherService {
         }
 
         if(isset($errors)){
-            Flight::redirect('/admin/new_other' . $errors);
+            Flight::redirect('/admin/new_attribute' . $errors);
         }
 
         else{
             Flight::redirect('/admin/games');
         }
+    }
+
+    /* EDIT A DEVELOPER */
+    public function serviceEditDeveloper($id){
+        $bddmanager = new BddManager();
+        $repo = $bddmanager->getDeveloperRepository();
+        $developer = $repo->getDeveloperById($id);
+        $developer = new Developer();
+        $developer->setId($id);
+        $developer->setName($_POST["name"]);
+
+        $repo->editDeveloper($developer);
+    }
+
+    /* DELETE A DEVELOPER */
+    public function serviceDeleteDeveloper($id){
+        $bddmanager = new BddManager();
+        $repo = $bddmanager->getDeveloperRepository();
+        $developer = $repo->getDeveloperById($id);
+        $developer = new Developer();
+        $developer->setId($id);
+
+        $repo->deleteDeveloper($developer);
+    }
+
+    /* EDIT A PUBLISHER */
+    public function serviceEditPublisher($id){
+        $bddmanager = new BddManager();
+        $repo = $bddmanager->getPublisherRepository();
+        $publisher = $repo->getPublisherById($id);
+        $publisher = new Publisher();
+        $publisher->setId($id);
+        $publisher->setName($_POST["name"]);
+
+        $repo->editPublisher($publisher);
+    }
+
+    /* DELETE A PUBLISHER */
+    public function serviceDeletePublisher($id){
+        $bddmanager = new BddManager();
+        $repo = $bddmanager->getPublisherRepository();
+        $publisher = $repo->getPublisherById($id);
+        $publisher = new Publisher();
+        $publisher->setId($id);
+
+        $repo->deletePublisher($publisher);
+    }
+
+    /* EDIT A FRANCHISE */
+    public function serviceEditFranchise($id){
+        $bddmanager = new BddManager();
+        $repo = $bddmanager->getFranchiseRepository();
+        $franchise = $repo->getFranchiseById($id);
+        $franchise = new Franchise();
+        $franchise->setId($id);
+        $franchise->setName($_POST["name"]);
+
+        $repo->editFranchise($franchise);
+    }
+
+    /* DELETE A FRANCHISE */
+    public function serviceDeleteFranchise($id){
+        $bddmanager = new BddManager();
+        $repo = $bddmanager->getFranchiseRepository();
+        $franchise = $repo->getFranchiseById($id);
+        $franchise = new Franchise();
+        $franchise->setId($id);
+
+        $repo->deleteFranchise($franchise);
+    }
+
+    /* EDIT A SYSTEM */
+    public function serviceEditSystem($id){
+        $bddmanager = new BddManager();
+        $repo = $bddmanager->getSystemRepository();
+        $system = $repo->getSystemById($id);
+        $system = new System();
+        $system->setId($id);
+        $system->setFull_name($_POST["full_name"]);
+        $system->setShort_name($_POST["short_name"]);
+        $system->setCompany($_POST["company"]);
+        $system->setColor_bg($_POST["color_bg"]);
+        $system->setColor_text($_POST["color_text"]);
+
+        $repo->editSystem($system);
+    }
+
+    /* DELETE A SYSTEM */
+    public function serviceDeleteSystem($id){
+        $bddmanager = new BddManager();
+        $repo = $bddmanager->getSystemRepository();
+        $system = $repo->getSystemById($id);
+        $system = new System();
+        $system->setId($id);
+
+        $repo->deleteSystem($system);
+    }
+
+    /* EDIT A LABEL */
+    public function serviceEditLabel($id){
+        $bddmanager = new BddManager();
+        $repo = $bddmanager->getLabelRepository();
+        $label = $repo->getLabelById($id);
+        $label = new Label();
+        $label->setId($id);
+        $label->setName($_POST["name"]);
+        $label->setDescription($_POST["description"]);
+
+        $repo->editLabel($label);
+    }
+
+    /* DELETE A LABEL */
+    public function serviceDeleteLabel($id){
+        $bddmanager = new BddManager();
+        $repo = $bddmanager->getLabelRepository();
+        $label = $repo->getLabelById($id);
+        $label = new Label();
+        $label->setId($id);
+
+        $repo->deleteLabel($label);
+    }
+
+    /* EDIT A THEME */
+    public function serviceEditTheme($id){
+        $bddmanager = new BddManager();
+        $repo = $bddmanager->getThemeRepository();
+        $theme = $repo->getThemeById($id);
+        $theme = new Theme();
+        $theme->setId($id);
+        $theme->setTitle($_POST["title"]);
+
+        $repo->editTheme($theme);
+    }
+
+    /* DELETE A THEME */
+    public function serviceDeleteTheme($id){
+        $bddmanager = new BddManager();
+        $repo = $bddmanager->getThemeRepository();
+        $theme = $repo->getThemeById($id);
+        $theme = new Theme();
+        $theme->setId($id);
+
+        $repo->deleteTheme($theme);
     }
 
 }

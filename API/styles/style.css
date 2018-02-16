@@ -246,14 +246,14 @@ h3 {
 
 
 
-/* NEW OTHER PAGE */
-#main_box_other {
+/* NEW ATTRIBUTES PAGE */
+#main_box_attributes {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.textarea_other {
+.textarea_attributes {
     width: 257px;
     max-width: 257px;
     height: 110px;
@@ -331,6 +331,36 @@ h5 {
     font-size: 40px;
 }
 
+
+
+/* ATTRIBUTES PAGE */
+#attributes {
+    width: 500px;
+}
+
+.table_name {
+    width: 25%;
+}
+
+.table_description {
+    width: 45%;
+}
+
+.table_shortname {
+    width: 10%;
+}
+
+.table_company {
+    width: 15%;
+}
+
+.table_colorbg {
+    width: 10%;
+}
+
+.table_colortext {
+    width: 10%;
+}
 
 
 
@@ -448,7 +478,6 @@ label {
 table {
     width: 900px;
     margin: 25px auto 50px auto;
-
 }
 
 th {
@@ -536,7 +565,6 @@ td {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    width: 100px;
     text-align: center;
     cursor: pointer;
 }
@@ -554,11 +582,11 @@ td {
     background-color: #00cec9;
 }
 
-.other {
+.attributes {
     background-color: #fab1a0;
     margin-bottom: 30px;
 }
 
-.other:hover {
+.attributes:hover {
     background-color: #e17055;
 }

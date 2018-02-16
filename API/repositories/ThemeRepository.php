@@ -14,6 +14,18 @@ class ThemeRepository extends Repository {
         return $themes;
     }
 
+    /* GET ALL THEMES ORDERED BY ID */
+    public function getAllThemesOrderedById(){
+        $query = "SELECT * FROM themes ORDER BY id";
+        $result = $this->connection->query($query);
+        $result = $result->fetchAll(PDO::FETCH_ASSOC);
+        $themes = [];
+        foreach($result as $data){
+            $themes[] = new Theme($data);
+        }
+        return $themes;
+    }
+
     /* GET A GAME'S THEMES */
     public function getThemesByGameId($id){
         $pdo = $this->connection->prepare("SELECT theme_id FROM games_themes WHERE game_id=:id");
@@ -122,5 +134,22 @@ class ThemeRepository extends Repository {
                 }
             }
         }
+    }
+
+    /* EDIT A THEME */
+    public function editTheme(Theme $theme){
+        $prepared = $this->connection->prepare("UPDATE themes SET title=:title WHERE id=:id");
+        $prepared->execute(array(
+            'id' => $theme->getId(),
+            'title' => $theme->getTitle()
+        ));
+    }
+
+    /* DELETE A THEME */
+    public function deleteTheme(Theme $theme){
+        $prepared = $this->connection->prepare("DELETE FROM themes WHERE id=:id");
+        $prepared->execute(array(
+            'id' => $theme->getId()
+        ));
     }
 }

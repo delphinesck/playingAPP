@@ -14,6 +14,18 @@ class FranchiseRepository extends Repository {
         return $franchises;
     }
 
+    /* GET ALL FRANCHISES ORDERED BY ID */
+    public function getAllFranchisesOrderedById(){
+        $query = "SELECT * FROM franchises ORDER BY id";
+        $result = $this->connection->query($query);
+        $result = $result->fetchAll(PDO::FETCH_ASSOC);
+        $franchises = [];
+        foreach($result as $data){
+            $franchises[] = new Franchise($data);
+        }
+        return $franchises;
+    }
+
     /* GET A GAME'S FRANCHISES */
     public function getFranchisesByGameId($id){
         $pdo = $this->connection->prepare("SELECT franchise_id FROM games_franchises WHERE game_id=:id");
@@ -118,5 +130,22 @@ class FranchiseRepository extends Repository {
                 }
             }
         }
+    }
+
+    /* EDIT A FRANCHISE */
+    public function editFranchise(Franchise $franchise){
+        $prepared = $this->connection->prepare("UPDATE franchises SET name=:name WHERE id=:id");
+        $prepared->execute(array(
+            'id' => $franchise->getId(),
+            'name' => $franchise->getName()
+        ));
+    }
+
+    /* DELETE A FRANCHISE */
+    public function deleteFranchise(Franchise $franchise){
+        $prepared = $this->connection->prepare("DELETE FROM franchises WHERE id=:id");
+        $prepared->execute(array(
+            'id' => $franchise->getId()
+        ));
     }
 }

@@ -175,10 +175,10 @@ class GameRepository extends Repository {
     }
 
     /* CHECK IF A GAME ALREADY EXISTS IN THE DATABASE */
-    public function checkTitle(Game $game){
+    public function checkTitle($title){
         $pdo = $this->connection->prepare("SELECT title FROM games WHERE title=:title");
         $pdo->execute(array(
-            'title' => $game->getTitle()
+            'title' => $title
         ));
         $result = $pdo->fetch(PDO::FETCH_ASSOC);
         if(!empty($result)){

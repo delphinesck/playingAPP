@@ -25,7 +25,12 @@ $bddmanager = new BddManager();
             <?php 
             if(!empty($_GET["incomplete"])){
                 echo "<div id='incomplete'>Please fill all fields.</div>";
-            } ?>
+            }
+
+            if(!empty($_GET["title"])){
+                echo "<div id='incomplete'>" . $_GET['title'] . " already exists.</div>";
+            }
+            ?>
 
 
     <!-- FORM -->

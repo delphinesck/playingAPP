@@ -14,6 +14,18 @@ class LabelRepository extends Repository {
         return $labels;
     }
 
+    /* GET ALL LABELS ORDERED BY ID */
+    public function getAllLabelsOrderedById(){
+        $query = "SELECT * FROM labels ORDER BY id";
+        $result = $this->connection->query($query);
+        $result = $result->fetchAll(PDO::FETCH_ASSOC);
+        $labels = [];
+        foreach($result as $data){
+            $labels[] = new Label($data);
+        }
+        return $labels;
+    }
+
     /* GET A GAME'S LABELS */
     public function getLabelsByGameId($id){
         $pdo = $this->connection->prepare("SELECT label_id FROM games_labels WHERE game_id=:id");
@@ -124,5 +136,26 @@ class LabelRepository extends Repository {
                 }
             }
         }
+    }
+
+    /* EDIT A LABEL */
+    public function editLabel(Label $label){
+        $prepared = $this->connection->prepare("UPDATE labels 
+                                                SET name=:name,
+                                                description=:description 
+                                                WHERE id=:id");
+        $prepared->execute(array(
+            'id' => $label->getId(),
+            'name' => $label->getName(),
+            'description' => $label->getDescription()
+        ));
+    }
+
+    /* DELETE A LABEL */
+    public function deleteLabel(Label $label){
+        $prepared = $this->connection->prepare("DELETE FROM labels WHERE id=:id");
+        $prepared->execute(array(
+            'id' => $label->getId()
+        ));
     }
 }
