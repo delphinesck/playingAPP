@@ -27,29 +27,52 @@ $publishers = $repoPublisher->getAllPublishersOrderedById();
                 </div>
             </div>
 
-            <a href="/WWW/PlayingAPP/API/admin/developers">
-                <button>Developers</button>
-            </a>
+            <div id="attributes_box">
+                <div>
+                    <a href="/WWW/PlayingAPP/API/admin/developers">
+                        <div class="attribute att_dev">
+                            <i class="fas fa-folder-open"></i>
+                            Developers
+                        </div>
+                    </a>
+                    <a href="/WWW/PlayingAPP/API/admin/publishers">
+                        <div class="attribute att_pub">
+                            <i class="fas fa-folder-open"></i>
+                            Publishers
+                        </div>
+                    </a>
+                </div>
 
-            <a href="/WWW/PlayingAPP/API/admin/publishers">
-                <button>Publishers</button>
-            </a>
+                <div>
+                    <a href="/WWW/PlayingAPP/API/admin/franchises">
+                        <div class="attribute att_fra">
+                            <i class="fas fa-bookmark"></i>
+                            Franchises
+                        </div>
+                    </a>
+                    <a href="/WWW/PlayingAPP/API/admin/systems">
+                        <div class="attribute att_sys">
+                            <i class="fas fa-gamepad"></i>
+                            Systems
+                        </div>
+                    </a>
+                </div>
 
-            <a href="/WWW/PlayingAPP/API/admin/franchises">
-                <button>Franchises</button>
-            </a>
-
-            <a href="/WWW/PlayingAPP/API/admin/systems">
-                <button>Systems</button>
-            </a>
-
-            <a href="/WWW/PlayingAPP/API/admin/labels">
-                <button>Labels</button>
-            </a>
-
-            <a href="/WWW/PlayingAPP/API/admin/themes">
-                <button>Themes</button>
-            </a>
+                <div>
+                    <a href="/WWW/PlayingAPP/API/admin/labels">
+                        <div class="attribute att_lab">
+                            <i class="fas fa-tags"></i>
+                            Labels
+                        </div>
+                    </a>
+                    <a href="/WWW/PlayingAPP/API/admin/themes">
+                        <div class="attribute att_the">
+                            <i class="fas fa-hashtag"></i>
+                            Themes
+                        </div>
+                    </a>
+                </div>
+            </div>
 
         </div>
     </div>

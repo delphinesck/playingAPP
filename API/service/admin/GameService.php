@@ -3,7 +3,7 @@
 class GameService {
     private $error;
 
-    /* GAME CREATION */
+    /* CREATE A GAME */
     public function serviceCreateGame(){
         $bddmanager = new BddManager();
         $repo = $bddmanager->getGameRepository();
@@ -16,7 +16,7 @@ class GameService {
             }
         }
 
-        /* CHECK IF GAME ALREADY EXISTS */
+        /* CHECK IF THE GAME ALREADY EXISTS */
         $result = $repo->checkTitle($_POST["title"]);
         if($result == false){
             /* IF AT LEAST THE TITLE AND SUMMARY ARE ENTERED, THE GAME CAN BE INSERTED INTO THE DATABASE */
@@ -112,7 +112,7 @@ class GameService {
         }
     }
 
-    /* FILE UPLOAD */
+    /* UPLOAD A FILE */
     public function dlFile($file){
         if(isset($file) && $file['error'] == 0){
             if($file['size'] <= 50000000 && $file['size'] > 10){
@@ -136,7 +136,7 @@ class GameService {
         }
     }
 
-    /* GAME EDITION */
+    /* EDIT A GAME */
     public function serviceEditGame($id){
         $bddmanager = new BddManager();
         $repoGame = $bddmanager->getGameRepository();
@@ -251,15 +251,35 @@ class GameService {
         $repoGame->editGame($game);
     }
 
-    /* GAME DELETION */
+    /* DELETE A GAME */
     public function serviceDeleteGame($id){
         $bddmanager = new BddManager();
-        $repo = $bddmanager->getGameRepository();
-        $game = $repo->getGameById($id);
+        $repoGame = $bddmanager->getGameRepository();
+        $game = $repoGame->getGameById($id);
         $game = new Game();
         $game->setId($id);
 
-        $repo->deleteGame($game);
+        /* DELETE ATTRIBUTES ASSOCIATED TO THE GAME IN (games_xxx) */
+        $repoDeveloper = $bddmanager->getDeveloperRepository();
+        $repoDeveloper->deleteDevelopersByGameId($game);
+
+        $repoPublisher = $bddmanager->getPublisherRepository();
+        $repoPublisher->deletePublishersByGameId($game);
+
+        $repoFranchise = $bddmanager->getFranchiseRepository();
+        $repoFranchise->deleteFranchisesByGameId($game);
+
+        $repoSystem = $bddmanager->getSystemRepository();
+        $repoSystem->deleteSystemsByGameId($game);
+
+        $repoLabel = $bddmanager->getLabelRepository();
+        $repoLabel->deleteLabelsByGameId($game);
+
+        $repoTheme = $bddmanager->getThemeRepository();
+        $repoTheme->deleteThemesByGameId($game);
+
+        /* DELETE THE GAME */
+        $repoGame->deleteGame($game);
     }
 
 }

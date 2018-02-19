@@ -197,6 +197,54 @@ class GameRepository extends Repository {
         ));
     }
 
+    /* DELETE ALL GAMES WITH THIS DEVELOPER ID IN (games_developers) */
+    public function deleteGamesByDeveloperId(Developer $developer){
+        $prepared = $this->connection->prepare("DELETE FROM games_developers WHERE developer_id=:developer_id");
+        $prepared->execute(array(
+            'developer_id' => $developer->getId()
+        ));
+    }
+
+    /* DELETE ALL GAMES WITH THIS PUBLISHER ID IN (games_publishers) */
+    public function deleteGamesByPublisherId(Publisher $publisher){
+        $prepared = $this->connection->prepare("DELETE FROM games_publishers WHERE publisher_id=:publisher_id");
+        $prepared->execute(array(
+            'publisher_id' => $publisher->getId()
+        ));
+    }
+
+    /* DELETE ALL GAMES WITH THIS FRANCHISE ID IN (games_franchises) */
+    public function deleteGamesByFranchiseId(Franchise $franchise){
+        $prepared = $this->connection->prepare("DELETE FROM games_franchises WHERE franchise_id=:franchise_id");
+        $prepared->execute(array(
+            'franchise_id' => $franchise->getId()
+        ));
+    }
+
+    /* DELETE ALL GAMES WITH THIS SYSTEM ID IN (games_systems) */
+    public function deleteGamesBySystemId(System $system){
+        $prepared = $this->connection->prepare("DELETE FROM games_systems WHERE system_id=:system_id");
+        $prepared->execute(array(
+            'system_id' => $system->getId()
+        ));
+    }
+
+    /* DELETE ALL GAMES WITH THIS LABEL ID IN (games_labels) */
+    public function deleteGamesByLabelId(Label $label){
+        $prepared = $this->connection->prepare("DELETE FROM games_labels WHERE label_id=:label_id");
+        $prepared->execute(array(
+            'label_id' => $label->getId()
+        ));
+    }
+
+    /* DELETE ALL GAMES WITH THIS THEME ID IN (games_themes) */
+    public function deleteGamesByThemeId(Theme $theme){
+        $prepared = $this->connection->prepare("DELETE FROM games_themes WHERE theme_id=:theme_id");
+        $prepared->execute(array(
+            'theme_id' => $theme->getId()
+        ));
+    }
+
 }
 
 ?>

@@ -172,7 +172,7 @@ class AttributeService {
         }
 
         else{
-            Flight::redirect('/admin/games');
+            Flight::redirect('/admin/attributes');
         }
     }
 
@@ -191,12 +191,17 @@ class AttributeService {
     /* DELETE A DEVELOPER */
     public function serviceDeleteDeveloper($id){
         $bddmanager = new BddManager();
-        $repo = $bddmanager->getDeveloperRepository();
-        $developer = $repo->getDeveloperById($id);
+        $repoDeveloper = $bddmanager->getDeveloperRepository();
+        $developer = $repoDeveloper->getDeveloperById($id);
         $developer = new Developer();
         $developer->setId($id);
 
-        $repo->deleteDeveloper($developer);
+        /* DELETE GAMES ASSOCIATED TO THE DEVELOPER IN (games_developers) */
+        $repoGame = $bddmanager->getGameRepository();
+        $repoGame->deleteGamesByDeveloperId($developer);
+
+        /* DELETE THE DEVELOPER */
+        $repoDeveloper->deleteDeveloper($developer);
     }
 
     /* EDIT A PUBLISHER */
@@ -214,12 +219,16 @@ class AttributeService {
     /* DELETE A PUBLISHER */
     public function serviceDeletePublisher($id){
         $bddmanager = new BddManager();
-        $repo = $bddmanager->getPublisherRepository();
-        $publisher = $repo->getPublisherById($id);
+        $repoPublisher = $bddmanager->getPublisherRepository();
+        $publisher = $repoPublisher->getPublisherById($id);
         $publisher = new Publisher();
         $publisher->setId($id);
 
-        $repo->deletePublisher($publisher);
+        /* DELETE GAMES ASSOCIATED TO THE PUBLISHER IN (games_publishers) */
+        $repoGame = $bddmanager->getGameRepository();
+        $repoGame->deleteGamesByPublisherId($publisher);
+
+        $repoPublisher->deletePublisher($publisher);
     }
 
     /* EDIT A FRANCHISE */
@@ -237,12 +246,16 @@ class AttributeService {
     /* DELETE A FRANCHISE */
     public function serviceDeleteFranchise($id){
         $bddmanager = new BddManager();
-        $repo = $bddmanager->getFranchiseRepository();
-        $franchise = $repo->getFranchiseById($id);
+        $repoFranchise = $bddmanager->getFranchiseRepository();
+        $franchise = $repoFranchise->getFranchiseById($id);
         $franchise = new Franchise();
         $franchise->setId($id);
 
-        $repo->deleteFranchise($franchise);
+        /* DELETE GAMES ASSOCIATED TO THE FRANCHISE IN (games_franchises) */
+        $repoGame = $bddmanager->getGameRepository();
+        $repoGame->deleteGamesByFranchiseId($franchise);
+
+        $repoFranchise->deleteFranchise($franchise);
     }
 
     /* EDIT A SYSTEM */
@@ -264,12 +277,16 @@ class AttributeService {
     /* DELETE A SYSTEM */
     public function serviceDeleteSystem($id){
         $bddmanager = new BddManager();
-        $repo = $bddmanager->getSystemRepository();
-        $system = $repo->getSystemById($id);
+        $repoSystem = $bddmanager->getSystemRepository();
+        $system = $repoSystem->getSystemById($id);
         $system = new System();
         $system->setId($id);
 
-        $repo->deleteSystem($system);
+        /* DELETE GAMES ASSOCIATED TO THE SYSTEM IN (games_systems) */
+        $repoGame = $bddmanager->getGameRepository();
+        $repoGame->deleteGamesBySystemId($system);
+
+        $repoSystem->deleteSystem($system);
     }
 
     /* EDIT A LABEL */
@@ -288,12 +305,16 @@ class AttributeService {
     /* DELETE A LABEL */
     public function serviceDeleteLabel($id){
         $bddmanager = new BddManager();
-        $repo = $bddmanager->getLabelRepository();
-        $label = $repo->getLabelById($id);
+        $repoLabel = $bddmanager->getLabelRepository();
+        $label = $repoLabel->getLabelById($id);
         $label = new Label();
         $label->setId($id);
 
-        $repo->deleteLabel($label);
+        /* DELETE GAMES ASSOCIATED TO THE LABEL IN (games_labels) */
+        $repoGame = $bddmanager->getGameRepository();
+        $repoGame->deleteGamesByLabelId($label);
+
+        $repoLabel->deleteLabel($label);
     }
 
     /* EDIT A THEME */
@@ -311,12 +332,16 @@ class AttributeService {
     /* DELETE A THEME */
     public function serviceDeleteTheme($id){
         $bddmanager = new BddManager();
-        $repo = $bddmanager->getThemeRepository();
-        $theme = $repo->getThemeById($id);
+        $repoTheme = $bddmanager->getThemeRepository();
+        $theme = $repoTheme->getThemeById($id);
         $theme = new Theme();
         $theme->setId($id);
 
-        $repo->deleteTheme($theme);
+        /* DELETE GAMES ASSOCIATED TO THE THEME IN (games_themes) */
+        $repoGame = $bddmanager->getGameRepository();
+        $repoGame->deleteGamesByThemeId($theme);
+
+        $repoTheme->deleteTheme($theme);
     }
 
 }

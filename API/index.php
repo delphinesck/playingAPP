@@ -7,6 +7,7 @@ require "autoloader.php";
 Flight::render('admin/header', array('header' => 'playingapp'), 'header');
 Flight::render('admin/footer', array('footer' => 'playingapp'), 'footer');
 
+
     /* MAIN PAGES */
 Flight::route('/', function(){
     Flight::render('home');
@@ -106,7 +107,13 @@ Flight::route('/admin/edit_theme/@id', function($id){
 
 
     /* SERVICES */
-/* CREATE A NEW GAME */
+/* LOGIN */
+Flight::route('/AdminLoginService', function(){
+    $adminService = new AdminService();
+    $result = $adminService->serviceLogin();
+});
+
+/* CREATE A GAME */
 Flight::route('/admin/CreateGameService', function(){
     $gameService = new GameService();
     $result = $gameService->serviceCreateGame();
@@ -126,7 +133,7 @@ Flight::route('/admin/DeleteGameService/@id', function($id){
     Flight::redirect('/admin/games');
 });
 
-/* CREATE A NEW ATTRIBUTE */
+/* CREATE AN ATTRIBUTE */
 Flight::route('/admin/CreateAttributeService', function(){
     $attributeService = new AttributeService();
     $result = $attributeService->serviceCreateAttribute();

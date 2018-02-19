@@ -4,6 +4,16 @@ html, body {
     letter-spacing: 0.2px;
 }
 
+
+/* LOGIN */
+#login_page {
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/backgrounds/1.jpg');
+    background-position: cover;
+}
+
+
 /* HEADER */
 header {
     position: fixed;
@@ -242,6 +252,79 @@ h3 {
 .form_detail {
     color: #999;
     font-size: 11px;
+}
+
+
+
+/* ATTRIBUTES PAGE */
+#attributes_box {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.attribute {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 250px;
+    padding: 50px 30px;
+    margin: 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    color: white;
+    font-size: 25px;
+    text-align: center;
+}
+
+.attribute i {
+    font-size: 70px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.att_dev {
+    background-color: #00b894;
+}
+.att_dev:hover {
+    background-color: #55efc4;
+}
+
+.att_pub {
+    background-color: #fdcb6e;
+}
+.att_pub:hover {
+    background-color: #ffeaa7;
+}
+
+.att_fra {
+    background-color: #0984e3;
+}
+.att_fra:hover {
+    background-color: #74b9ff;
+}
+
+.att_sys {
+    background-color: #e17055;
+}
+.att_sys:hover {
+    background-color: #fab1a0;
+}
+
+.att_lab {
+    background-color: #6c5ce7;
+}
+.att_lab:hover {
+    background-color: #a29bfe;
+}
+
+.att_the {
+    background-color: #d63031;
+}
+.att_the:hover {
+    background-color: #ff7675;
 }
 
 
