@@ -238,13 +238,10 @@ $repoTheme = $bddmanager->getThemeRepository();
                             <div class="space_under">
                                 <h5><i class="fas fa-gamepad"></i> System(s)</h5>
                                 <?php
-                                $systems_ids = $repoSystem->getSystemsByGameId($id);
-                                $systems = [];
+                                $systems = $repoGame->getSystemsOfGame($game);
 
-                                foreach($systems_ids as $system_id){
-                                    $sys_id = $system_id["system_id"];
-                                    $system = $repoSystem->getSystemById($sys_id);
-                                    echo $system->getFull_name() . "<br />";
+                                foreach($systems as $system){
+                                    echo $system["full_name"] . "<br />";
                                 }
                                 ?>
                             </div>

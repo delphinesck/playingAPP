@@ -245,6 +245,20 @@ class GameRepository extends Repository {
         ));
     }
 
+    /* GET ALL SYSTEMS OF A GAME */
+    public function getSystemsOfGame(Game $game){
+        $pdo = $this->connection->prepare(" SELECT systems.* FROM systems
+                                            JOIN games_systems
+                                            ON systems.id=games_systems.system_id
+                                            WHERE games_systems.game_id=:id_game");
+        $pdo->execute(array(
+            'id_game' => $game->getId()
+        ));
+        $result = $pdo->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
 }
 
 ?>

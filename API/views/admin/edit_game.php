@@ -257,13 +257,13 @@ $repoTheme = $bddmanager->getThemeRepository();
 
                             <div class="box_content scrolling">
                                 <?php
-                                $systems_ids = $repoSystem->getSystemsByGameId($id);
-                                $systems = $repoSystem->getAllSystems();
-                                foreach($systems as $key=>$system){
+                                $systems = $repo->getSystemsOfGame($game);
+                                $all_systems = $repoSystem->getAllSystems();
+                                foreach($all_systems as $key=>$system){
                                     echo "<label><input type='checkbox' value='" . $system->getId() . "' name='systems[" . $key . "]' ";
 
-                                    foreach($systems_ids as $system_id){
-                                        $sys_id = $system_id["system_id"];
+                                    foreach($systems as $sys){
+                                        $sys_id = $sys['id'];
 
                                         if($sys_id == $system->getId()){
                                             echo "checked ";

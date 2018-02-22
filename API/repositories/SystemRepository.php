@@ -26,16 +26,16 @@ class SystemRepository extends Repository {
         return $systems;
     }
 
-    /* GET A GAME'S SYSTEMS */
-    public function getSystemsByGameId($id){
-        $pdo = $this->connection->prepare("SELECT system_id FROM games_systems WHERE game_id=:id");
-        $pdo->execute(array(
-            'id' => $id
-        ));
-        $systems_ids = $pdo->fetchAll(PDO::FETCH_ASSOC);
+    // /* GET A GAME'S SYSTEMS */
+    // public function getSystemsByGameId($id){
+    //     $pdo = $this->connection->prepare("SELECT system_id FROM games_systems WHERE game_id=:id");
+    //     $pdo->execute(array(
+    //         'id' => $id
+    //     ));
+    //     $systems_ids = $pdo->fetchAll(PDO::FETCH_ASSOC);
 
-        return $systems_ids;
-    }
+    //     return $systems_ids;
+    // }
 
     /* GET A SYSTEM WITH ITS ID */
     public function getSystemById($system_id){
